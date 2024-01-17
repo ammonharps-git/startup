@@ -2,11 +2,11 @@
 
 # Elevator Pitch
 
-Everyone's listened to someone giving a speach. Maybe you were sitting in the far back. You can hear the crowd laugh, but you couldn't hear the joke. You turn to your neighbor: "What did they say?" Well, NO MORE! Talks (TM) is a new application designed to bring the speaker to you. With Talks (TM) you can save all of your favoirte talks by your favorite speakers. Then, you can share what you love by creating a collabrotive playlist of speaches with all your friends. Inspiration has never been easier.
+Everyone's listened to someone giving a speach. Maybe you were sitting in the far back. You could hear the crowd laugh, but you couldn't hear the joke. You turn to your neighbor: "What did they say?" Well, NO MORE! Talks (TM) is a new application designed to bring the speaker to you. With Talks (TM) you can save all of your favoirte talks by your favorite speakers. Then, you can share what you love by creating a collabrotive playlist of speaches with all your friends. Inspiration has never been easier.
 
 # Key Features
 
-- Save talk URLs that are pulled from the internet.
+- Save URLs given by a variety of speakers that are pulled from the internet.
 - Create playlists of talk URLs and mark talks as Favorites.
 - Log in and view your saved talks and playlists.
 - Save playlists of your favorite talks.
@@ -44,4 +44,5 @@ Talks (TM) will be ported to use the React web framework.
 
 # Application sketches
 
-
+![Login page](./talks-login.png)
+![Playlist screen](./talks-playlist-screen.png)
