@@ -7,7 +7,7 @@ Everyone's listened to someone giving a speach. Maybe you were sitting in the fa
 # Key Features
 
 - Save talk URLs that are pulled from the internet.
-- Create playlists of talk URLs.
+- Create playlists of talk URLs and mark talks as Favorites.
 - Log in and view your saved talks and playlists.
 - Save playlists of your favorite talks.
 - Share playlists with other users.
@@ -16,7 +16,7 @@ Everyone's listened to someone giving a speach. Maybe you were sitting in the fa
 
 ## HTML
 
-Talks (TM) will use correct HTML structure for the application. Two HTML pages will be included: one for login and one for talk management and sharing.
+Talks (TM) will use correct HTML structure for the application. Two HTML pages will be included: one for login and one for talk URL management and sharing.
 
 ## CSS
 
