@@ -1,5 +1,4 @@
 # startup
-CS 260 Assignments
 
 # Elevator Pitch
 
