@@ -14,7 +14,19 @@ Everyone's listened to someone giving a speach. Maybe you were sitting in the fa
 
 # Description of Technology
 
-## Authentication
+## HTML
+
+Talks (TM) will use correct HTML structure for the application. Two HTML pages will be included: one for login and one for talk management and sharing.
+
+## CSS
+
+Talks (TM) will use appropriate application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
+
+## JavaScript
+
+Talks (TM) will use Javascript to provide login, talk/playlist displays, playlist management, and backend endpoint calls.
+
+## Authentication and other services
 
 Authentication will be used to create user accounts and log users in. It will also be used when sharing playlists so that only users that have access to a playlist can view and contribute to it.
 
@@ -24,7 +36,11 @@ A database will be necessary to persistently store user login information, autht
 
 ## WebSocket data
 
-WebSockets will be used when viewing, adding to, removing from, or otherwise making changes to collaborative playlists with other users in real time.
+WebSockets will be used when viewing, adding to, removing from, or otherwise making changes to collaborative playlists with other users in real time. If a change is made to a collaborative playlist, that change is reflected in real time to all other users that the playlist is shared with.
+
+# React
+
+Talks (TM) will be ported to use the React web framework.
 
 # Application sketches
 
