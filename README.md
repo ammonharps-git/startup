@@ -8,8 +8,8 @@ Everyone's listened to someone giving a speach. Maybe you were sitting in the fa
 
 - Save URLs given by a variety of speakers that are pulled from the internet.
 - Create playlists of talk URLs and mark talks as Favorites.
-- Log in and view your saved talks and playlists.
-- Save playlists of your favorite talks.
+- Securely log in and view your saved talks and playlists.
+- Persistently save playlists and favorited talks.
 - Share playlists with other users.
 
 # Description of Technology
