@@ -17,4 +17,11 @@ Remember to cancel the elastic IP address at the end of the semester, because it
 -[] Cancel elastic IP address
 -[] Terminate instance
 
+## Setting up Https, TLS, and web certificates
 
+This is super cool. It also gave me a lot of technical trouble and wasn't working correctly when I ran it in Chrome. After about an hour and a half of painstaking troubleshooting, I discovered that the problem was solved by just clearing my browser cache and cookies. So sometimes it's good to remmeber that a simple reset will fix many problems!
+
+Domain name: listentotalks.click
+Useful command for caddy restart: sudo service caddy restart
+
+Overall this assignment was very helpful for me for understanding how domain names, TLS, and web certificates work. I think it's super interesting. 
