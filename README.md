@@ -6,18 +6,16 @@ Everyone's listened to someone giving a speach. Maybe you were sitting in the fa
 
 # Key Features
 
-- Search for speach URLs that are pulled from the internet.
-- Persistently save URLs.
-- Create playlists of talk URLs and mark talks as Favorites.
-- Securely log in and view your saved talks and playlists.
-- Persistently save playlists and favorited talks.
-- Share playlists with other users and allow for collaboration.
+- Search for speaches that are pulled from the internet.
+- Persistently save playlists of speeches.
+- Securely log in and view your saved playlists.
+- Share playlists with other users and allow for real-time collaboration.
 
 # Description of Technology
 
 ## HTML
 
-Talks (TM) will use correct HTML structure for the application. Two HTML pages will be included: one for login and one for talk URL management and sharing.
+Talks (TM) will use correct HTML structure for the application. Three HTML pages will be included: one for login, one for selecting a playlist, and and one for viewing, editing,and sharing a playlist.
 
 ## CSS
 
@@ -25,7 +23,7 @@ Talks (TM) will use appropriate application styling that looks good on different
 
 ## JavaScript
 
-Talks (TM) will use Javascript to provide login, talk/playlist displays, playlist management, and backend endpoint calls.
+Talks (TM) will use Javascript to provide login, talk/playlist displays, playlist management (editing, adding, removing, reordering), and backend endpoint calls.
 
 ## Authentication and other services
 
@@ -33,7 +31,7 @@ Authentication will be used to create user accounts and log users in. It will al
 
 ## Database data
 
-A database will be necessary to persistently store user login information, authtokens, playlists, favorites, and other applicaiton information.
+A database will be necessary to persistently store user login information, authtokens, playlists, and other applicaiton information.
 
 ## WebSocket data
 
