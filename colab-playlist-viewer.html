@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Playlist Viewer</title>
+    <title>Collaborative Playlist Viewer</title>
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
-      <h1>Playlist Viewer</h1>
+      <h1>Collaborative Playlist Viewer</h1>
 
       <div class="user-id">
         Logged in as:
@@ -28,40 +28,18 @@
     </header>
 
     <main>
-      <h2>Playlist Name</h2>
-      <table class="playlist">
-        <tr>
-          <th>Name</th>
-          <th>Author</th>
-          <th>Added by</th>
-        </tr>
-        <tr class="talk">
-          <td class="talk-name">His Grace is Sufficent</td>
-          <td class="author">Brad Wilcox</td>
-          <td class="added-by">Username</td>
-        </tr>
-        <tr class="talk">
-          <td class="talk-name">Think Celestial</td>
-          <td class="author">Russel M. Nelson</td>
-          <td class="added-by">Username</td>
-        </tr>
-        <tr class="talk">
-          <td class="talk-name">The Character of Christ</td>
-          <td class="author">David A. Bednar</td>
-          <td class="added-by">Username</td>
-        </tr>
-      </table>
+      <h2>Collaborative Playlist Name</h2>
+      <ul class="playlist">
+        <li class="talk-name">His Grace is Sufficent by Brad Wilcox</li>
+        <li class="talk-name">Think Celestial by Russel M. Nelson</li>
+        <li class="talk-name">The Character of Christ by David A. Bednar</li>
+      </ul>
 
       <!-- More formatting with old style HTML -->
       <br />
 
-      <button>Edit Playlist</button>
-      <button>Add Talk</button>
-      <button>Remove Talk</button>
-      <button>Done</button>
-
       <div>
-        <label for="size">Size of playlist:</label>
+        <label for="size">Size of playlist</label>
         <input type="text" id="count" value="3" size="1" readonly />
       </div>
 
