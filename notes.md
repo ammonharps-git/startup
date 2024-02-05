@@ -25,3 +25,9 @@ Domain name: listentotalks.click
 Useful command for caddy restart: sudo service caddy restart
 
 Overall this assignment was very helpful for me for understanding how domain names, TLS, and web certificates work. I think it's super interesting. 
+
+## Startup HTML
+
+This project was helpful for understanding how to create the skeleton of a website. I think it is super interesting how the different pages can link between each other and create a better user interface. 
+
+Overall this assignment was helpful for understanding how to create a more structured environment for the full website. 
