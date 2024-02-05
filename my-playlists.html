@@ -5,7 +5,7 @@
     <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Playlists</title>
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="T-logo.jpg" />
   </head>
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
@@ -21,13 +21,20 @@
       <nav>
         <li><a href="index.html">Logout</a></li>
         <li><a href="my-playlists.html">My Playlists</a></li>
+        <li><a href="discover.html">Discover Talks</a></li>
       </nav>
-
       <hr />
     </header>
 
     <main>
       <input type="text" placeholder="Search for playlist">
+      <!--- PLACEHOLDER: Insert searching script here -->
+      <button>New Playlist</button>
+      <!--- PLACEHOLDER: Insert button functionality here -->
+      <button>Delete Playlist</button>
+      <!--- PLACEHOLDER: Insert button functionality here -->
+
+      <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
       <a href="playlist-viewer.html"><h2>Playlist Name 1</h2></a>
       <ul class="playlist-description">
         <li class="description">Description of playlist here.</li>
@@ -42,18 +49,14 @@
       <ul class="colab-playlist-description">
         <li class="description">Description of colaborative playlist here.</li>
       </ul>
-
-      <!-- More formatting with old style HTML -->
       <br />
 
+      <!--- This will be dynamically calculated -->
       <div>
         <label for="size">Number of playlists</label>
         <input type="text" id="count" value="3" size="1" readonly />
       </div>
-
       <br />
-
-      
     </main>
 
     <!-- Github link footer-->
