@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/tw-cen-mt-std">
-    <link rel="stylesheet" href="my-playlists.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
   
   <body>
@@ -50,17 +50,39 @@
 
     <main>
       <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
-      <h1 class="discover">Discover</h1>
+      <h1 class="banner">Discover</h1>
       <div class="card-box">
         <div class="box-header">
-          <h1>My Playlists</h1>
+          <h1>Talks</h1>
+        </div>
+        <div class="talks-area">
+          <div class="talk">
+            <h3 class="talk-name">His Grace is Sufficent</h3>
+            <h3 class="speaker">Brad Wilcox</h3>
+            <td class="add-button"><a href="playlist-viewer.html" class="btn btn-primary">Add to playlist</a></td>
+          </div>
+          <div class="talk">
+            <h3 class="talk-name">Think Celestial</h3>
+            <h3 class="speaker">Russel M. Nelson</h3>
+            <td class="add-button"><a href="playlist-viewer.html" class="btn btn-primary">Add to playlist</a></td>
+          </div>
+          <div class="talk">
+            <h3 class="talk-name">The Character of Christ</h3>
+            <h3 class="speaker">David A. Bednar</h3>
+            <td class="add-button"><a href="playlist-viewer.html" class="btn btn-primary">Add to playlist</a></td>
+          </div>
+        </div>
+      </div>
+      <div class="card-box">
+        <div class="box-header">
+          <h1>Public Playlists</h1>
         </div>
         <div class="scroll-area scrollbar" id="scrollbar5"> 
           <span id="card">
             <span class="card">
               <img class="card-img-top" src="https://picsum.photos/300/200" />
               <div class="card-body">
-                <h5 class="card-title">Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
+                <h5 class="card-title">Public Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
                 <p class="card-text">Here is the playlist description.</p>
                 <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
                 <a href="playlist-viewer.html" class="btn">Edit</a>
@@ -71,7 +93,7 @@
             <div class="card">
               <img class="card-img-top" src="https://picsum.photos/300/201" />
               <div class="card-body">
-                <h5 class="card-title">Playlist 2 </h5>
+                <h5 class="card-title">Public Playlist 2 </h5>
                 <p class="card-text">Here is the playlist description.</p>
                 <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
                 <a href="playlist-viewer.html" class="btn">Edit</a>
@@ -82,7 +104,7 @@
             <div class="card">
               <img class="card-img-top" src="https://picsum.photos/300/202" />
               <div class="card-body">
-                <h5 class="card-title">Playlist 3 </h5>
+                <h5 class="card-title">Public Playlist 3 </h5>
                 <p class="card-text">Here is the playlist description.</p>
                 <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
                 <a href="playlist-viewer.html" class="btn">Edit</a>
@@ -93,7 +115,7 @@
             <div class="card">
               <img class="card-img-top" src="https://picsum.photos/300/203" />
               <div class="card-body">
-                <h5 class="card-title">Playlist 4 </h5>
+                <h5 class="card-title">Public Playlist 4 </h5>
                 <p class="card-text">Here is the playlist description.</p>
                 <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
                 <a href="playlist-viewer.html" class="btn">Edit</a>
@@ -104,7 +126,7 @@
             <div class="card">
               <img class="card-img-top" src="https://picsum.photos/300/204" />
               <div class="card-body">
-                <h5 class="card-title">Playlist 5 </h5>
+                <h5 class="card-title">Public Playlist 5 </h5>
                 <p class="card-text">Here is the playlist description.</p>
                 <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
                 <a href="playlist-viewer.html" class="btn">Edit</a>
@@ -115,7 +137,7 @@
             <div class="card">
               <img class="card-img-top" src="https://picsum.photos/300/205" />
               <div class="card-body">
-                <h5 class="card-title">Playlist 6 </h5>
+                <h5 class="card-title">Public Playlist 6 </h5>
                 <p class="card-text">Here is the playlist description.</p>
                 <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
                 <a href="playlist-viewer.html" class="btn">Edit</a>
@@ -123,80 +145,7 @@
             </div>
           </span>
         </div>
-      </div>
-      
-      <div class="card-box">
-        <div class="box-header">
-          <h1>Collaborative Playlists</h1>
-        </div>
-        <div class="scroll-area scrollbar" id="scrollbar5"> 
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/206" />
-              <div class="card-body">
-                <h5 class="card-title">Colab Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/207" />
-              <div class="card-body">
-                <h5 class="card-title">Colab Playlist 2 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/208" />
-              <div class="card-body">
-                <h5 class="card-title">Colab Playlist 3 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/209" />
-              <div class="card-body">
-                <h5 class="card-title">Colab Playlist 4 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/210" />
-              <div class="card-body">
-                <h5 class="card-title">Colab Playlist 5 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/211" />
-              <div class="card-body">
-                <h5 class="card-title">Colab Playlist 6 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
-              </div>
-            </div>
-          </span>
-        </div>
+        
       </div>
     </main>
 
