@@ -11,10 +11,14 @@
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/tw-cen-mt-std">
     <link rel="stylesheet" href="styles.css">
   </head>
+
+  <!-- TODO add way to add a new playlist -->
   
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
+      <!-- Script import -->
+      <script src="my-playlists.js"></script>
       <!-- Navigational elements -->
       <nav class="navbar navbar-expand-lg bg-dark" style="box-shadow: 0px 0px 10px black;">
         <div class="container-fluid">
@@ -49,8 +53,9 @@
     </header>
 
     <main>
+      <!--- Display welcome banner-->
+      <h1 class="banner">Welcome back, <span id="bannerUsername"></span>.</h1> 
       <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
-      <h1 class="banner">Welcome back, Ammon.</h1>   <!-- PLACEHOLDER: Username -->
       <div class="card-box">
         <div class="box-header">
           <h1>My Playlists</h1>
@@ -58,23 +63,23 @@
         <div class="scroll-area scrollbar" id="scrollbar5"> 
           <span id="card">
             <span class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/200" />
+              <img class="card-img-top" onClick="viewPlaylist('view')" src="https://picsum.photos/300/200" />
               <div class="card-body">
                 <h5 class="card-title">Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </span>
           </span>
           <span id="card">
             <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/201" />
+              <img class="card-img-top" onClick="viewPlaylist('view')" src="https://picsum.photos/300/201" />
               <div class="card-body">
                 <h5 class="card-title">Playlist 2 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -84,8 +89,8 @@
               <div class="card-body">
                 <h5 class="card-title">Playlist 3 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -95,8 +100,8 @@
               <div class="card-body">
                 <h5 class="card-title">Playlist 4 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button> 
               </div>
             </div>
           </span>
@@ -106,8 +111,8 @@
               <div class="card-body">
                 <h5 class="card-title">Playlist 5 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -117,8 +122,8 @@
               <div class="card-body">
                 <h5 class="card-title">Playlist 6 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -136,8 +141,8 @@
               <div class="card-body">
                 <h5 class="card-title">Colab Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -147,8 +152,8 @@
               <div class="card-body">
                 <h5 class="card-title">Colab Playlist 2 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -158,8 +163,8 @@
               <div class="card-body">
                 <h5 class="card-title">Colab Playlist 3 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -169,8 +174,8 @@
               <div class="card-body">
                 <h5 class="card-title">Colab Playlist 4 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -180,8 +185,8 @@
               <div class="card-body">
                 <h5 class="card-title">Colab Playlist 5 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
@@ -191,8 +196,8 @@
               <div class="card-body">
                 <h5 class="card-title">Colab Playlist 6 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <a href="playlist-viewer.html" class="btn btn-primary">Listen</a>
-                <a href="playlist-viewer.html" class="btn">Edit</a>
+                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
+                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>

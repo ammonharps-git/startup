@@ -12,6 +12,7 @@
     <body>
         <header>
             <!-- Header items here?-->
+            <script src="index.js"></script>
         </header>
         <main>
             <!-- Login menu -->
@@ -33,10 +34,12 @@
                                             <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Password" />
                                         </div>
                                         <p class="small mb-5 pb-lg-2">
-                                            <a class="text-white-50" href="#!">Forgot password?</a>
+                                            <a class="text-white-50" href="#!">Not registered? Click here.</a>
                                             <!--TODO fix link-->
                                         </p>
-                                        <a href="my-playlists.html" class="btn btn-outline-light btn-lg px-5"><b>LOGIN</b></a>
+                                        <button onclick="login()" class="btn btn-outline-light btn-lg px-5"><b>LOGIN</b></button>
+                                        <!-- Error message container -->
+                                        <div id="errorMessage" class="error-message"></div>
                                         <p></p><p class="mb-0">Ammon Harps <a href="https://github.com/ammonharps-git/startup" class="text-white-50 fw-bold">Github</a></p>
                                     </div>
                     
