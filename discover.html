@@ -52,49 +52,17 @@
     </header>
 
     <main>
-      <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
       <h1 class="banner">Discover</h1>
       <div class="card-box">
         <div class="box-header">
           <h1>Talks</h1>
         </div>
         <div class="talks-area">
-          <div class="talk-container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="talk-text" style="text-align: left;">
-                <h5 class="talk-name">His Grace is Sufficient by Brad Wilcox</h5>
-            </div>
-            <div class="button-container" style="text-align: right;">
-                <div class="listen-button" style="padding-left: 1rem; padding-right: 1rem;"><a href="playlist-viewer.html" class="btn btn-primary">Listen</a></div>
-            </div>
-            <div class="button-container" style="text-align: right;">
-              <div class="add-button"><a href="playlist-viewer.html" class="btn btn-outline-light">Add</a></div>
-            </div>
-          </div>
-          <div class="talk-container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="talk-text" style="text-align: left;">
-                <h5 class="talk-name">The Character of Christ by David A. Bednar</h5>
-            </div>
-            <div class="button-container" style="text-align: right;">
-                <div class="listen-button" style="padding-left: 1rem; padding-right: 1rem;"><a href="playlist-viewer.html" class="btn btn-primary">Listen</a></div>
-            </div>
-            <div class="button-container" style="text-align: right;">
-              <div class="add-button"><a href="playlist-viewer.html" class="btn btn-outline-light">Add</a></div>
-            </div>
-          </div>
-          <div class="talk-container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="talk-text" style="text-align: left;">
-                <h5 class="talk-name">Think Celesital by Russel M. Nelson</h5>
-            </div>
-            <div class="button-container" style="text-align: right;">
-                <div class="listen-button" style="padding-left: 1rem; padding-right: 1rem;"><a href="playlist-viewer.html" class="btn btn-primary">Listen</a></div>
-            </div>
-            <div class="button-container" style="text-align: right;">
-              <div class="add-button"><a href="playlist-viewer.html" class="btn btn-outline-light">Add</a></div>
-            </div>
-          </div>
+          <div id="talkListContainer"></div>
         </div>
       </div>
 
+      <!-- PLACEHOLDER public playlists require the use of websocket -->
       <div class="card-box">
         <div class="box-header">
           <h1>Public Playlists</h1>

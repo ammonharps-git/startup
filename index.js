@@ -1,13 +1,21 @@
 
 function login() {
-    // ----------PLACEHOLDER-- ------- 
-    // Hardcoded values in place of database
-    const validCredentials = [
-        { username: 'user1', password: 'pass1' },
-        { username: 'user2', password: 'pass2' },
-        // Add more valid credentials as needed
-    ];
-    // --------END PLACEHOLDER---------
+
+    // PLACEHOLDER
+    // Set the local storage initial value
+    if (localStorage.getItem('valid-credentials')) {
+        localStorage.setItem('valid-credentials', JSON.stringify([]));
+    }
+    // Retrieve valid credentials from local storage
+    let validCredentials = [];
+    try {
+        const storedCredentials = localStorage.getItem('valid-credentials');
+        if (storedCredentials) {
+            validCredentials = JSON.parse(storedCredentials);
+        }
+    } catch (error) {
+        console.error('Error parsing JSON from localStorage:', error);
+    }
 
     // Get the username and password that the user entered
     var username = document.getElementById("typeUsernameX").value;
@@ -36,3 +44,48 @@ function login() {
     }
 }
 
+function register() {
+    // Get the username and password that the user entered
+    var username = document.getElementById("typeUsernameX").value;
+    var password = document.getElementById("typePasswordX").value;
+
+    // PLACEHOLDER
+    // Set the local storage initial value
+    if (localStorage.getItem('valid-credentials')) {
+        localStorage.setItem('valid-credentials', JSON.stringify([]));
+    }
+    // Retrieve valid credentials from local storage
+    let validCredentials = [];
+    try {
+        const storedCredentials = localStorage.getItem('valid-credentials');
+        if (storedCredentials) {
+            validCredentials = JSON.parse(storedCredentials);
+        }
+    } catch (error) {
+        console.error('Error parsing JSON from localStorage:', error);
+    }
+
+    // Check if the provided username and password match any valid credentials
+    const sameUsername = validCredentials.some(cred => cred.username === username);
+
+    if (sameUsername) {
+        // Clear username and password
+        document.getElementById("typeUsernameX").value = '';
+        document.getElementById("typePasswordX").value = '';
+
+        // Display error message and hide it after 3 seconds
+        const errorMessageElement = document.getElementById('errorMessage');
+        errorMessageElement.innerText = 'Sorry, that username is already taken. Please try again.';
+        errorMessageElement.style.display = 'block';
+
+        setTimeout(() => {
+            errorMessageElement.style.display = 'none';
+            errorMessageElement.innerText = ''; // Clear the message for the next attempt
+        }, 3000); // Hide the message after 3 secondsc
+    } else {
+        validCredentials.push({'username': username, 'password': password})
+        localStorage.setItem('array', JSON.stringify(validCredentials));
+        // Redirect to 'my-playlists.html' since login is successful
+        window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
+    }
+}

@@ -41,6 +41,10 @@ h5 {
     margin-left: 1em;
 }
 
+#register-button {
+    cursor: pointer;
+}
+
 #edit-icon {
     width: 1em;
     color: red;

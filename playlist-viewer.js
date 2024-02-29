@@ -26,24 +26,26 @@ document.addEventListener('DOMContentLoaded', function () {
     else {
         editIcon.src = "checkmark.png"
         editIcon.onclick = function() {
-            // Call the viewPlaylist function with the playlistName and 'edit' as parameters
+            // Call the viewPlaylist function with the playlistName and 'view' as parameters
             viewPlaylist(playlistName, 'view');
         };
     }
+    displayTalks(mode);
     
-    displayTalks();
+    
 });
 
 function removeTalk(talkName) {
     // Retrieve the username from the URL
     const playlistName = getQueryParam('playlistName');
+    const mode = getQueryParam('mode');
 
     // --------PLACEHOLDER--------- 
     // talkList = database values
     // --------END PLACEHOLDER-----
 
     // Check if the talkName is in the talkList
-    const indexToRemove = talkList.indexOf(talkName);
+    const indexToRemove = talkList.findIndex(talk => talk.name === talkName);
 
     if (indexToRemove !== -1) {
         // Remove the talk if found
@@ -52,12 +54,28 @@ function removeTalk(talkName) {
     } else {
         console.log(`${talkName} not found in ${playlistName}.`);
     }
-    displayTalks();
+    displayTalks(mode);
 }
+
+// --------------PLACEHOLDER ------------
+// There is no way to implement this without persistent data from the database
+// TODO add the talk link (when database implemented)
+function addTalk(talkName) {
+    // Retrieve the username from the URL
+    const playlistName = getQueryParam('playlistName');
+    const mode = getQueryParam('mode');
+
+    // Check if the talkName is in the talkList
+    
+    console.log('Attempted to add a talk to another playlist.')
+    
+    displayTalks(mode);
+}
+// ------------END PLACEHOLDER -----------
 
 
 // Function to dynamically create and display talk elements
-function displayTalks() {
+function displayTalks(mode) {
     const talkListContainer = document.getElementById('talkListContainer');
 
     // Clear the existing content in the container
@@ -84,27 +102,29 @@ function displayTalks() {
         talkTextContainer.appendChild(listenButton);
         talkTextContainer.appendChild(talkName);
 
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.className = 'buttons-container';
-
-        const addButton = createButton('Add', 'playlist-viewer.html');
-        const removeButton = createButton('Remove', 'playlist-viewer.html');
-
-        buttonsContainer.appendChild(addButton);
-        buttonsContainer.appendChild(removeButton);
-
         talkContainer.appendChild(talkTextContainer);
-        talkContainer.appendChild(buttonsContainer);
 
+        if (mode === 'edit') {
+            const buttonsContainer = document.createElement('div');
+            buttonsContainer.className = 'buttons-container';
+    
+            const addButton = createButton('Add to other playlist', () => addTalk(talk.name));
+            const removeButton = createButton('Remove', () => removeTalk(talk.name));
+    
+            buttonsContainer.appendChild(addButton);
+            buttonsContainer.appendChild(removeButton);
+    
+            talkContainer.appendChild(buttonsContainer);
+        }
         talkListContainer.appendChild(talkContainer);
     });
 }
 
 // Function to create a button
-function createButton(label, link) {
+function createButton(label, onclick) {
     const button = document.createElement('a');
     button.className = 'btn btn-outline-light';
-    button.href = link;
+    button.onclick = onclick;
     button.textContent = label;
     return button;
 }
