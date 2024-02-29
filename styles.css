@@ -95,6 +95,7 @@ padding: 2rem;
     overflow-x: auto;
     white-space: nowrap;
     padding: 3rem;
+    align-items: center;
 }
 
 .card-img-top {
@@ -116,6 +117,27 @@ padding: 2rem;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.6);
     border: none;
+}
+
+.new-playlist-card {
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    width: 10rem;
+    cursor: pointer;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-top-left-radius: 5rem;
+    border-bottom-left-radius: 5rem;
 }
 
 .talks-area {
