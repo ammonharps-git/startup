@@ -11,9 +11,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Retrieve the username from the URL
     const playlistName = getQueryParam('playlistName');
+    const mode = getQueryParam('mode');
 
     // Update the content of an HTML element with the username
     document.getElementById('playlistName').innerText = playlistName;
+    var editIcon = document.getElementById('edit-icon');
+    if (mode === 'view') {
+        editIcon.src = "edit-icon.png"
+        editIcon.onclick = function() {
+            // Call the viewPlaylist function with the playlistName and 'edit' as parameters
+            viewPlaylist(playlistName, 'edit');
+        };
+    }
+    else {
+        editIcon.src = "checkmark.png"
+        editIcon.onclick = function() {
+            // Call the viewPlaylist function with the playlistName and 'edit' as parameters
+            viewPlaylist(playlistName, 'view');
+        };
+    }
+    
     displayTalks();
 });
 
@@ -35,6 +52,7 @@ function removeTalk(talkName) {
     } else {
         console.log(`${talkName} not found in ${playlistName}.`);
     }
+    displayTalks();
 }
 
 

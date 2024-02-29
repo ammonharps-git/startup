@@ -27,10 +27,24 @@ h1 {
     color: rgba(255,255,255,.7);
 }
 
+.heading {
+    font-weight: bold;
+    color: rgba(255,255,255,.7);
+}
+
 h5 {
     font-weight: bold;
+}
+
+.talk-name {
     display: inline-block;
     margin-left: 1em;
+}
+
+#edit-icon {
+    width: 1em;
+    color: red;
+    cursor: pointer;
 }
 
 .banner {
@@ -39,7 +53,7 @@ h5 {
 }
 
 .nav-item, .nav-link {
-    color: blue;
+    color: rgb(85, 85, 255);
     cursor: pointer;
 }
 
