@@ -88,6 +88,7 @@ function register() {
         validCredentials.push({'username': username, 'password': password});
         localStorage.setItem('valid-credentials', JSON.stringify(validCredentials));
         localStorage.setItem(username, JSON.stringify({'name': username, 'playlists': []}));
+        console.log("profile: " + localStorage.getItem(username));
         console.log("Registered and logged in as", username);
         // Redirect to 'my-playlists.html' since login is successful
         window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;

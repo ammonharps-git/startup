@@ -16,6 +16,7 @@
   <!-- TODO add way to add a new playlist -->
   
   <body>
+    <div id="dark-screen"><br></div>
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
       <!-- Script import -->
@@ -57,6 +58,14 @@
     <main>
       <!--- Display welcome banner-->
       <h1 class="banner">Welcome back, <span id="bannerUsername"></span>.</h1> 
+      <!--Popup-->
+      <div id="popup">
+        <label for="playlistName">Playlist Name:</label>
+        <input type="text" id="playlistName" placeholder="Enter playlist name">
+        <br><br>
+        <button onclick="createPlaylist()" class="btn btn-primary">Create</button>
+        <button onclick="cancel()" class="btn">Cancel</button>
+    </div>
       <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
       <div class="card-box">
         <div class="box-header">
@@ -65,11 +74,14 @@
         <div class="scroll-area scrollbar" id="scrollbar5"> 
           <span id="card">
             <span class="new-playlist-card">
-              <div >
-                <button onclick="viewPlaylist('Playlist 1','view')" class="btn btn-primary">New</button>
-              </div>
+              <img id="new-playlist-icon" onclick="showPopup()" src="plus-icon.png">
             </span>
           </span>
+
+
+          <span id="listPlaylistContainer"></span>
+
+
           <span id="card">
             <span class="card">
               <img class="card-img-top" onclick="viewPlaylist('Playlist 1','view')" src="https://picsum.photos/300/200" />
