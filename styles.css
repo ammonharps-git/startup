@@ -36,7 +36,7 @@ h5 {
     padding: 1rem;
 }
 
-.nav-link {
+.nav-item, .nav-link {
     color: blue;
     cursor: pointer;
 }
