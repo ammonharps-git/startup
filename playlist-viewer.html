@@ -17,10 +17,11 @@
     <header>
       <!-- Script import -->
       <script src="playlist-viewer.js"></script>
+      <script src="shared.js"></script>
       <!-- Navigational elements -->
       <nav class="navbar navbar-expand-lg bg-dark" style="box-shadow: 0px 0px 10px black;">
         <div class="container-fluid">
-          <a class="navbar-brand" href="my-playlists.html">
+          <a class="navbar-brand" onclick="viewMyPlaylists()">
             <h1><b>TALKS</b></h1>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
@@ -32,10 +33,10 @@
                 <a class="nav-link" href="index.html">Logout</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="my-playlists.html">Playlists</a>
+                <a class="nav-link" onclick="viewMyPlaylists()">Playlists</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="discover.html">Discover</a>
+                <a class="nav-link" onclick="viewDiscover()">Discover</a>
               </li>
             </ul>
           </div>
@@ -52,7 +53,7 @@
 
     <main>
       <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
-      <h1 class="banner">Playlist</h1>
+      <h1 class="banner"><span id="playlistName"></span></h1>
       <div class="card-box">
         <div class="box-header">
           <h1>Talks</h1>

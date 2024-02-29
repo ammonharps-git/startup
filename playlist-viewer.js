@@ -3,14 +3,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // Retrieve the username from the URL
-    const username = getQueryParam('username');
+    const playlistName = getQueryParam('playlistName');
 
     // Update the content of an HTML element with the username
-    document.getElementById('bannerUsername').innerText = username;
+    document.getElementById('playlistName').innerText = playlistName;
 });
 
-// Function to extract query parameters from the URL
-function getQueryParam(name) {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    return urlSearchParams.get(name);
-}

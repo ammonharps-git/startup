@@ -36,6 +36,11 @@ h5 {
     padding: 1rem;
 }
 
+.nav-link {
+    color: blue;
+    cursor: pointer;
+}
+
 #errorMessage {
     color: red;
     margin-top: 2em;

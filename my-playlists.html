@@ -19,10 +19,11 @@
     <header>
       <!-- Script import -->
       <script src="my-playlists.js"></script>
+      <script src="shared.js"></script>
       <!-- Navigational elements -->
       <nav class="navbar navbar-expand-lg bg-dark" style="box-shadow: 0px 0px 10px black;">
         <div class="container-fluid">
-          <a class="navbar-brand" href="my-playlists.html">
+          <a class="navbar-brand" onclick="viewMyPlaylists()">
             <h1><b>TALKS</b></h1>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
@@ -34,10 +35,10 @@
                 <a class="nav-link" href="index.html">Logout</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="my-playlists.html">Playlists</a>
+                <a class="nav-link" onclick="viewMyPlaylists()">Playlists</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="discover.html">Discover</a>
+                <a class="nav-link" onclick="viewDiscover()">Discover</a>
               </li>
             </ul>
           </div>
@@ -63,23 +64,23 @@
         <div class="scroll-area scrollbar" id="scrollbar5"> 
           <span id="card">
             <span class="card">
-              <img class="card-img-top" onClick="viewPlaylist('view')" src="https://picsum.photos/300/200" />
+              <img class="card-img-top" onclick="viewPlaylist('Playlist 1','view')" src="https://picsum.photos/300/200" />
               <div class="card-body">
                 <h5 class="card-title">Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
-                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
+                <button onclick="viewPlaylist('Playlist 1','view')" class="btn btn-primary">Listen</button>
+                <button onclick="viewPlaylist('Playlist 1','edit')" class="btn">Edit</button>
               </div>
             </span>
           </span>
           <span id="card">
             <div class="card">
-              <img class="card-img-top" onClick="viewPlaylist('view')" src="https://picsum.photos/300/201" />
+              <img class="card-img-top" onclick="viewPlaylist('Playlist 2','view')" src="https://picsum.photos/300/201" />
               <div class="card-body">
                 <h5 class="card-title">Playlist 2 </h5>
                 <p class="card-text">Here is the playlist description.</p>
-                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
-                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
+                <button onclick="viewPlaylist('Playlist 2','view')" class="btn btn-primary">Listen</button>
+                <button onclick="viewPlaylist('Playlist 2','edit')" class="btn">Edit</button>
               </div>
             </div>
           </span>
