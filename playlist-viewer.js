@@ -36,13 +36,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function removeTalk(talkName) {
+
+
+    // TODO make it so that the playlistID is in the URL instead of the name so that you don't have to do insane lookups here
+
+
     // Retrieve the username from the URL
     const playlistName = getQueryParam('playlistName');
     const mode = getQueryParam('mode');
-
-    // --------PLACEHOLDER--------- 
-    // talkList = database values
-    // --------END PLACEHOLDER-----
+    const username = getQueryParam('username');
+    let profile = JSON.parse(localStorage.getItem(username));
+    let playlistID = "TODO"     // TODO fix this
+    let playlist = JSON.parse(localStorage.getItem())
+    playlists.forEach((playlistID) => {
+        const talk = JSON.parse(localStorage.getItem("talk-" + talkName));
+        let playlist = JSON.parse(localStorage.getItem(playlistID));
+        let playlistTalks = playlist['talks'];
+        playlistTalks.push(talk);
+        localStorage.setItem(playlistID, JSON.stringify(playlist));
+        console.log(talkName, "added to ", playlistID.toString());
+    })
+    alert(`Talk added to playlist(s)!`);
 
     // Check if the talkName is in the talkList
     const indexToRemove = talkList.findIndex(talk => talk.name === talkName);
@@ -61,18 +75,18 @@ function removeTalk(talkName) {
 // There is no way to implement this without persistent data from the database
 // TODO add the talk link (when database implemented)
 function addTalk(talkName) {
-    // Retrieve the username from the URL
-    const playlistName = getQueryParam('playlistName');
-    const mode = getQueryParam('mode');
-
     // Check if the talkName is in the talkList
     
     console.log('Attempted to add a talk to another playlist.')
     
-    displayTalks(mode);
+    const playlistName = document.getElementById('playlistName').value;
+    const playlistDescription = document.getElementById('playlistDescription').value;
+    const username = getQueryParam('username');
+
+    alert(`Talk added to playlist(s)!`);
+    hidePopup();
 }
 // ------------END PLACEHOLDER -----------
-
 
 // Function to dynamically create and display talk elements
 function displayTalks(mode) {

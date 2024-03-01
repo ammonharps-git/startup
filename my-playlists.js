@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Update the content of an HTML element with the username
     document.getElementById('bannerUsername').innerText = username;
+
+    displayPlaylists();
 });
 
 function showPopup() {
@@ -18,13 +20,15 @@ function showPopup() {
 }
 
 function createPlaylist() {
-    let playlistName = document.getElementById('playlistName').value;
+    const playlistName = document.getElementById('playlistName').value;
+    const playlistDescription = document.getElementById('playlistDescription').value;
+    const username = getQueryParam('username');
     if (playlistName.trim() !== '') {
         const randomID = "playlist-" + generateRandomString(20);
-        const username = getQueryParam('username')
+        const username = getQueryParam('username');
         console.log(localStorage.getItem(username));
-        localStorage.setItem(randomID, JSON.stringify([]))
-        let profile = JSON.parse(localStorage.getItem(username))
+        localStorage.setItem(randomID, JSON.stringify({'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []}));
+        let profile = JSON.parse(localStorage.getItem(username));
         profile['playlists'].push(randomID);
         localStorage.setItem(username, JSON.stringify(profile));
         alert(`Playlist "${playlistName}" created!`);
@@ -32,6 +36,12 @@ function createPlaylist() {
         alert('Please enter a valid playlist name.');
     }
     hidePopup();
+}
+
+function createAndReload() {
+    createPlaylist();
+    const username = getQueryParam('username');
+    window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
 }
 
 function cancel() {
@@ -44,6 +54,7 @@ function hidePopup() {
     const darkScreen = document.getElementById('dark-screen');
     darkScreen.style.display = 'none';
     document.getElementById('playlistName').value = ''
+    displayPlaylists();
 }
 
 function generateRandomString(length) {
@@ -59,46 +70,75 @@ function generateRandomString(length) {
 }
 
 function displayPlaylists() {
+
     const talkListContainer = document.getElementById('listPlaylistContainer');
 
     // Clear the existing content in the container
     talkListContainer.innerHTML = '';
 
+    const username = getQueryParam('username');
+    const profile = JSON.parse(localStorage.getItem(username));
+    const playlists = profile['playlists'];
+
+    const addPlaylistCard = document.getElementById("new-playlist-card");
+    if (playlists.length === 0) {
+        addPlaylistCard.style.borderRadius = '5rem';
+        console.log(addPlaylistCard.style.borderRadius)
+    }
+    else {
+        addPlaylistCard.style.borderRadius = 'none';
+    }
+
     // Iterate over the talkList and create/display talk elements
-    talkList.forEach(talk => {
-        const talkContainer = document.createElement('div');
-        talkContainer.className = 'talk-container';
+    let index = 0;
+    playlists.forEach((playlistID) => {
+        console.log("Displaying playlist:", playlistID);
+        const playlist = JSON.parse(localStorage.getItem(playlistID));
+        const card = document.createElement('span');
+        card.id = `card${index + 1}`;
+        card.className = 'card';
 
-        const talkTextContainer = document.createElement('div');
-        talkTextContainer.className = 'talk-text-container';
+        const img = document.createElement('img');
+        img.className = 'card-img-top';
+        img.src = `https://picsum.photos/300/` + (200 + index).toString();
+        img.alt = `Playlist Image ${index + 1}`;
+        img.onclick = () => viewPlaylist(playlist['playlistName'], 'view');
 
-        const listenButton = document.createElement('a');
-        listenButton.className = 'btn btn-primary';
-        listenButton.href = talk.listenLink;
-        listenButton.target = '_blank';
-        listenButton.textContent = 'Listen';
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
 
-        const talkName = document.createElement('h5');
-        talkName.className = 'talk-name';
-        talkName.textContent = talk.name;
+        const title = document.createElement('h5');
+        title.className = 'card-title';
+        title.textContent = playlist['playlistName'];
 
-        talkTextContainer.appendChild(listenButton);
-        talkTextContainer.appendChild(talkName);
+        const description = document.createElement('p');
+        description.className = 'card-text';
+        description.textContent = playlist['playlistDescription'];
 
-        talkContainer.appendChild(talkTextContainer);
+        const listenButton = createButton('Listen', () => viewPlaylist(playlist.playlistName, 'view'), "btn btn-primary", 'white');
+        const editButton = createButton('Edit', () => viewPlaylist(playlist.playlistName, 'edit'), "btn", 'black');
 
-        if (mode === 'edit') {
-            const buttonsContainer = document.createElement('div');
-            buttonsContainer.className = 'buttons-container';
-    
-            const addButton = createButton('Add to other playlist', () => addTalk(talk.name));
-            const removeButton = createButton('Remove', () => removeTalk(talk.name));
-    
-            buttonsContainer.appendChild(addButton);
-            buttonsContainer.appendChild(removeButton);
-    
-            talkContainer.appendChild(buttonsContainer);
-        }
-        talkListContainer.appendChild(talkContainer);
+        cardBody.appendChild(title);
+        cardBody.appendChild(description);
+        cardBody.appendChild(listenButton);
+        cardBody.appendChild(editButton);
+
+        card.appendChild(img);
+        card.appendChild(cardBody);
+
+        talkListContainer.appendChild(card);
+        index = index + 1;
     });
 }
+
+
+// Function to create a button
+function createButton(label, onclick, className, textColor) {
+    const button = document.createElement('a');
+    button.className = className
+    button.onclick = onclick;
+    button.textContent = label;
+    button.style.color = textColor;
+    button.style.cursor = 'pointer';
+    return button;
+    }

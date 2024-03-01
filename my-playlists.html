@@ -60,12 +60,17 @@
       <h1 class="banner">Welcome back, <span id="bannerUsername"></span>.</h1> 
       <!--Popup-->
       <div id="popup">
-        <label for="playlistName">Playlist Name:</label>
-        <input type="text" id="playlistName" placeholder="Enter playlist name">
+        <div class="inputs">
+          <label for="playlistName">Playlist Name:</label>
+          <input type="text" id="playlistName" placeholder="Enter playlist name">
+          <br>
+          <label for="playlistDescription">Playlist Description:</label>
+          <input type="text" id="playlistDescription" placeholder="Enter playlist description">
+        </div>
         <br><br>
-        <button onclick="createPlaylist()" class="btn btn-primary">Create</button>
+        <button onclick="createAndReload()" class="btn btn-primary">Create</button>
         <button onclick="cancel()" class="btn">Cancel</button>
-    </div>
+      </div>
       <!--- PLACEHOLDER: The following information is stored in and retreived from the database -->
       <div class="card-box">
         <div class="box-header">
@@ -73,81 +78,11 @@
         </div>
         <div class="scroll-area scrollbar" id="scrollbar5"> 
           <span id="card">
-            <span class="new-playlist-card">
+            <span class="new-playlist-card" id="new-playlist-card">
               <img id="new-playlist-icon" onclick="showPopup()" src="plus-icon.png">
             </span>
           </span>
-
-
           <span id="listPlaylistContainer"></span>
-
-
-          <span id="card">
-            <span class="card">
-              <img class="card-img-top" onclick="viewPlaylist('Playlist 1','view')" src="https://picsum.photos/300/200" />
-              <div class="card-body">
-                <h5 class="card-title">Playlist 1 <span class="badge bg-secondary text-white">New</span></h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <button onclick="viewPlaylist('Playlist 1','view')" class="btn btn-primary">Listen</button>
-                <button onclick="viewPlaylist('Playlist 1','edit')" class="btn">Edit</button>
-              </div>
-            </span>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" onclick="viewPlaylist('Playlist 2','view')" src="https://picsum.photos/300/201" />
-              <div class="card-body">
-                <h5 class="card-title">Playlist 2 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <button onclick="viewPlaylist('Playlist 2','view')" class="btn btn-primary">Listen</button>
-                <button onclick="viewPlaylist('Playlist 2','edit')" class="btn">Edit</button>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/202" />
-              <div class="card-body">
-                <h5 class="card-title">Playlist 3 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
-                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/203" />
-              <div class="card-body">
-                <h5 class="card-title">Playlist 4 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
-                <button onClick="viewPlaylist('edit')" class="btn">Edit</button> 
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/204" />
-              <div class="card-body">
-                <h5 class="card-title">Playlist 5 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
-                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
-              </div>
-            </div>
-          </span>
-          <span id="card">
-            <div class="card">
-              <img class="card-img-top" src="https://picsum.photos/300/205" />
-              <div class="card-body">
-                <h5 class="card-title">Playlist 6 </h5>
-                <p class="card-text">Here is the playlist description.</p>
-                <button onClick="viewPlaylist('view')" class="btn btn-primary">Listen</button>
-                <button onClick="viewPlaylist('edit')" class="btn">Edit</button>
-              </div>
-            </div>
-          </span>
         </div>
       </div>
       
