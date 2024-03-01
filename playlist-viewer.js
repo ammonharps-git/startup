@@ -80,6 +80,9 @@ function displayTalks(mode) {
     const playlistID = getQueryParam('playlistID');
     const playlist = JSON.parse(localStorage.getItem(playlistID))
     const talkList = playlist['talks'];
+    if (talkList.length === 0) {
+
+    }
     talkList.forEach(talk => {
         const talkContainer = document.createElement('div');
         talkContainer.className = 'talk-container';
@@ -106,10 +109,10 @@ function displayTalks(mode) {
             const buttonsContainer = document.createElement('div');
             buttonsContainer.className = 'buttons-container';
     
-            const addButton = createButton('Add to other playlist', () => addTalk(talk.name));
+            //const addButton = createButton('Add to other playlist', () => addTalk(talk.name));
             const removeButton = createButton('Remove', () => removeTalk(talk.talkName));
     
-            buttonsContainer.appendChild(addButton);
+            //buttonsContainer.appendChild(addButton);
             buttonsContainer.appendChild(removeButton);
     
             talkContainer.appendChild(buttonsContainer);
@@ -124,5 +127,6 @@ function createButton(label, onclick) {
     button.className = 'btn btn-outline-light';
     button.onclick = onclick;
     button.textContent = label;
+    button.style.marginLeft = '1rem';
     return button;
 }

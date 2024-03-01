@@ -66,6 +66,13 @@ h5 {
     margin-top: 2em;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
 main {
 /* fallback for old browsers */
 background: #6a11cb;
@@ -77,6 +84,10 @@ background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 11
 background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 
 padding: 2rem;
+flex: 1;
+border-bottom-left-radius: 1rem;
+border-bottom-right-radius: 1rem;
+
 }
 
 .card-box {
