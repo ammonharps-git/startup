@@ -1,33 +1,28 @@
 
-// PLACEHOLDER for database values
-let talkList = [
-    { name: 'His Grace is Sufficient by Brad Wilcox', listenLink: 'https://speeches.byu.edu/talks/brad-wilcox/his-grace-is-sufficient/' }, 
-    { name: 'The Character of Christ by David A. Bednar', listenLink: "https://www2.byui.edu/presentations/transcripts/religionsymposium/2003_01_25_bednar.htm"},
-    { name: 'Think Celesital by Russel M. Nelson', listenLink: 'https://www.churchofjesuschrist.org/study/general-conference/2023/10/51nelson?lang=eng'}
-];
-
 // Display the username at the top of welcome banner
 document.addEventListener('DOMContentLoaded', function () {
 
     // Retrieve the username from the URL
-    const playlistName = getQueryParam('playlistName');
+    const playlistID = getQueryParam('playlistID');
     const mode = getQueryParam('mode');
 
     // Update the content of an HTML element with the username
+    console.log("PlaylistID:", playlistID)
+    const playlistName = JSON.parse(localStorage.getItem(playlistID))['playlistName'];
     document.getElementById('playlistName').innerText = playlistName;
     var editIcon = document.getElementById('edit-icon');
     if (mode === 'view') {
         editIcon.src = "edit-icon.png"
         editIcon.onclick = function() {
             // Call the viewPlaylist function with the playlistName and 'edit' as parameters
-            viewPlaylist(playlistName, 'edit');
+            viewPlaylist(playlistID, 'edit');
         };
     }
     else {
         editIcon.src = "checkmark.png"
         editIcon.onclick = function() {
             // Call the viewPlaylist function with the playlistName and 'view' as parameters
-            viewPlaylist(playlistName, 'view');
+            viewPlaylist(playlistID, 'view');
         };
     }
     displayTalks(mode);
@@ -36,38 +31,24 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function removeTalk(talkName) {
-
-
-    // TODO make it so that the playlistID is in the URL instead of the name so that you don't have to do insane lookups here
-
-
-    // Retrieve the username from the URL
-    const playlistName = getQueryParam('playlistName');
+    // Get info from URL and get playlist from database
+    const playlistID = getQueryParam('playlistID');
     const mode = getQueryParam('mode');
-    const username = getQueryParam('username');
-    let profile = JSON.parse(localStorage.getItem(username));
-    let playlistID = "TODO"     // TODO fix this
-    let playlist = JSON.parse(localStorage.getItem())
-    playlists.forEach((playlistID) => {
-        const talk = JSON.parse(localStorage.getItem("talk-" + talkName));
-        let playlist = JSON.parse(localStorage.getItem(playlistID));
-        let playlistTalks = playlist['talks'];
-        playlistTalks.push(talk);
-        localStorage.setItem(playlistID, JSON.stringify(playlist));
-        console.log(talkName, "added to ", playlistID.toString());
-    })
-    alert(`Talk added to playlist(s)!`);
 
-    // Check if the talkName is in the talkList
-    const indexToRemove = talkList.findIndex(talk => talk.name === talkName);
-
+    // Filter the playlist
+    let playlist = JSON.parse(localStorage.getItem(playlistID))
+    console.log(playlist);
+    const indexToRemove = playlist['talks'].findIndex(talk => talk['talkName'] === talkName);
     if (indexToRemove !== -1) {
-        // Remove the talk if found
-        talkList.splice(indexToRemove, 1);
-        console.log(`${talkName} removed from ${playlistName}.`);
+        playlist['talks'].splice(indexToRemove, 1);
     } else {
-        console.log(`${talkName} not found in ${playlistName}.`);
+        console.error(`Talk with name "${talkName}" not found in the playlist.`);
     }
+    console.log(playlist);
+    localStorage.setItem(playlistID, JSON.stringify(playlist));
+    console.log("Removed", talkName, "from", playlist['playlistName']);
+
+    // Update screen
     displayTalks(mode);
 }
 
@@ -96,6 +77,9 @@ function displayTalks(mode) {
     talkListContainer.innerHTML = '';
 
     // Iterate over the talkList and create/display talk elements
+    const playlistID = getQueryParam('playlistID');
+    const playlist = JSON.parse(localStorage.getItem(playlistID))
+    const talkList = playlist['talks'];
     talkList.forEach(talk => {
         const talkContainer = document.createElement('div');
         talkContainer.className = 'talk-container';
@@ -111,7 +95,7 @@ function displayTalks(mode) {
 
         const talkName = document.createElement('h5');
         talkName.className = 'talk-name';
-        talkName.textContent = talk.name;
+        talkName.textContent = talk.talkName;
 
         talkTextContainer.appendChild(listenButton);
         talkTextContainer.appendChild(talkName);
@@ -123,7 +107,7 @@ function displayTalks(mode) {
             buttonsContainer.className = 'buttons-container';
     
             const addButton = createButton('Add to other playlist', () => addTalk(talk.name));
-            const removeButton = createButton('Remove', () => removeTalk(talk.name));
+            const removeButton = createButton('Remove', () => removeTalk(talk.talkName));
     
             buttonsContainer.appendChild(addButton);
             buttonsContainer.appendChild(removeButton);

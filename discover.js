@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // PLACEHOLDER for database values (delete)
     let talkList = [
-        { name: 'His Grace is Sufficient by Brad Wilcox', listenLink: 'https://speeches.byu.edu/talks/brad-wilcox/his-grace-is-sufficient/' }, 
-        { name: 'The Character of Christ by David A. Bednar', listenLink: "https://www2.byui.edu/presentations/transcripts/religionsymposium/2003_01_25_bednar.htm"},
-        { name: 'Think Celesital by Russel M. Nelson', listenLink: 'https://www.churchofjesuschrist.org/study/general-conference/2023/10/51nelson?lang=eng'}
+        { talkName: 'His Grace is Sufficient by Brad Wilcox', listenLink: 'https://speeches.byu.edu/talks/brad-wilcox/his-grace-is-sufficient/' }, 
+        { talkName: 'The Character of Christ by David A. Bednar', listenLink: "https://www2.byui.edu/presentations/transcripts/religionsymposium/2003_01_25_bednar.htm"},
+        { talkName: 'Think Celesital by Russel M. Nelson', listenLink: 'https://www.churchofjesuschrist.org/study/general-conference/2023/10/51nelson?lang=eng'}
     ];
     localStorage.setItem("all-talks", JSON.stringify(talkList));
     talkList.forEach((talk) => {
-        localStorage.setItem("talk-" + talk['name'], JSON.stringify(talk));
+        localStorage.setItem("talk-" + talk['talkName'], JSON.stringify(talk));
     })
 
     displayTalks();
@@ -157,7 +157,7 @@ function displayTalks() {
 
         const talkName = document.createElement('h5');
         talkName.className = 'talk-name';
-        talkName.textContent = talk.name;
+        talkName.textContent = talk.talkName;
 
         talkTextContainer.appendChild(listenButton);
         talkTextContainer.appendChild(talkName);
@@ -166,7 +166,7 @@ function displayTalks() {
 
         const buttonsContainer = document.createElement('div');
         buttonsContainer.className = 'buttons-container';
-        const addButton = createButton('Add to playlist', () => showPopup(talk.name, []));
+        const addButton = createButton('Add to playlist', () => showPopup(talk.talkName, []));
         buttonsContainer.appendChild(addButton);
         talkContainer.appendChild(buttonsContainer);
 

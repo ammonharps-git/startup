@@ -102,7 +102,7 @@ function displayPlaylists() {
         img.className = 'card-img-top';
         img.src = `https://picsum.photos/300/` + (200 + index).toString();
         img.alt = `Playlist Image ${index + 1}`;
-        img.onclick = () => viewPlaylist(playlist['playlistName'], 'view');
+        img.onclick = () => viewPlaylist(playlistID, 'view');
 
         const cardBody = document.createElement('div');
         cardBody.className = 'card-body';
@@ -115,8 +115,8 @@ function displayPlaylists() {
         description.className = 'card-text';
         description.textContent = playlist['playlistDescription'];
 
-        const listenButton = createButton('Listen', () => viewPlaylist(playlist.playlistName, 'view'), "btn btn-primary", 'white');
-        const editButton = createButton('Edit', () => viewPlaylist(playlist.playlistName, 'edit'), "btn", 'black');
+        const listenButton = createButton('Listen', () => viewPlaylist(playlistID, 'view'), "btn btn-primary", 'white');
+        const editButton = createButton('Edit', () => viewPlaylist(playlistID, 'edit'), "btn", 'black');
 
         cardBody.appendChild(title);
         cardBody.appendChild(description);

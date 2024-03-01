@@ -1,8 +1,8 @@
 
 
-function viewPlaylist(playlistName, mode) {
+function viewPlaylist(playlistID, mode) {
     const username = getQueryParam('username');
-    window.location.href = `playlist-viewer.html?username=${encodeURIComponent(username)}&playlistName=${encodeURIComponent(playlistName)}&mode=${encodeURIComponent(mode)}`;
+    window.location.href = `playlist-viewer.html?username=${encodeURIComponent(username)}&playlistID=${encodeURIComponent(playlistID)}&mode=${encodeURIComponent(mode)}`;
 }
 
 function viewMyPlaylists() {
