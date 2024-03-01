@@ -53,6 +53,18 @@ Talks (TM) will be ported to use the React web framework.
 [x] - done - 10% Application text content. Text is displayed using the Merriday font
 [x] - done - 10% Application images. I added curved edges around my profile photo.
 
+## JavaScript Deliverable
+
+[x] - done - Prerequisite: Simon JavaScript deployed to your production environment
+[x] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+[x] - done - Prerequisite: Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable. 
+[x] - done - Prerequisite: At least 10 git commits spread consistently throughout the assignment period.
+[x] - done - Significant use of JavaScript to create a viable working application
+[x] - done - 20% JavaScript support for future login.
+[x] - done - 20% JavaScript support for future database data.
+[x] - done - 20% JavaScript support for future WebSocket.
+[x] - done - 40% JavaScript support for your application's interaction logic.
+
 # Application sketches
 
 ![Login page](./talks-login.png)
