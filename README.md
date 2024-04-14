@@ -65,6 +65,19 @@ Talks (TM) will be ported to use the React web framework.
 [x] - done - 20% JavaScript support for future WebSocket.
 [x] - done - 40% JavaScript support for your application's interaction logic.
 
+## Services Deliverable
+
+[x] - done - Prerequisite: Simon Service deployed to your production environment
+[x] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+[x] - done - Prerequisite: Notes in your startup Git repository README.md file 
+[x] - done - Prerequisite: At least 10 git commits spread consistently throughout the assignment period.
+[x] - done - Backend web service support and interaction
+[x] - done - 40% - Create an HTTP service using Node.js and Express
+[x] - done - 10% - Frontend served up using Express static middleware
+[x] - done - 10% - Your frontend calls third party service endpoints    (random image generator)
+[x] - done - 20% - Your backend provides service endpoints
+[x] - done - 20% - Your frontend calls your service endpoints
+
 # Application sketches
 
 ![Login page](./talks-login.png)
