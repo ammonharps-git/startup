@@ -160,8 +160,12 @@ async function displayPlaylists() {
             const playlist = playlists.filter((item) => item.playlistID === playlistID)[0]
             //const playlist = JSON.parse(localStorage.getItem(playlistID));
 
-            
-
+            const reply = await fetch("https://picsum.photos/300/200", {
+                method: 'GET',
+                headers: {'content-type': 'application/json'},
+            });
+            const imageData = await reply;
+            const imageUrl = imageData.download_url || imageData.url; 
 
 
             const card = document.createElement('span');
@@ -170,7 +174,7 @@ async function displayPlaylists() {
 
             const img = document.createElement('img');
             img.className = 'card-img-top';
-            img.src = `https://picsum.photos/300/` + (200 + index).toString();
+            img.src = imageUrl;
             img.alt = `Playlist Image ${index + 1}`;
             img.onclick = () => viewPlaylist(playlistID, 'view');
 
