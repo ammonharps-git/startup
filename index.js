@@ -16,33 +16,39 @@ app.use(`/api`, apiRouter);
 
 // get users
 apiRouter.get('/users', (_req, res) => {
-  res.send(users);
+  console.log("GET  /users");   // testing
+  res.send(JSON.stringify(users));
 });
 
 // get playlists
 apiRouter.get('/playlists', (_req, res) => {
-    res.send(playlists);
+  console.log("GET  /playlists");   // testing
+    res.send(JSON.stringify(playlists));
   });
 
 // get talks
 apiRouter.get('/talks', (_req, res) => {
-    res.send(talks);
+  console.log("GET  /talks");   // testing
+    res.send(JSON.stringify(talks));
   });
 
 // Register new user
-apiRouter.post('/register', (req, res) => {
-  users = updateUsers(req.body);
+apiRouter.post('/updateUsers', (req, res) => {
+  console.log("POST /updateUsers");   // testing
+  users = updateUsers(req.body, users);
   res.send(users);
 });
 
 // Update talks
 apiRouter.post('/updateTalks', (req, res) => {
-  talks = updateTalks(req.body);
+  console.log("POST /updateTalks");   // testing
+  talks = updateTalks(req.body, talks);
   res.send(talks);
 });
 
 // Add new playlist
 apiRouter.post('/updatePlaylists', (req, res) => {
+  console.log("POST /updatePlaylists");   // testing
   playlists = updatePlaylists(req.body, playlists);
   res.send(playlists);
 });
@@ -61,7 +67,7 @@ let users = [];
 let playlists = [];
 let talks = [];
 
-function updateUsers(newUser) {
+function updateUsers(newUser, users) {
   users = users.filter((item) => item.username != newUser.username)
   users.push(newUser);
   return users;
@@ -73,7 +79,7 @@ function updatePlaylists(newPlaylist, playlists) {
   return playlists;
 }
 
-function updateTalks(newTalk) {
+function updateTalks(newTalk, talks) {
   talks = talks.filter((item) => item.talkID != newTalk.talkID)
   talks.push(newTalk);
   return talks;

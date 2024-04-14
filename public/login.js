@@ -16,7 +16,6 @@ async function login() {
         const response = await fetch('/api/users', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Doesnt matter',
         });
   
         // Store what the service gave us as the high scores
@@ -33,7 +32,7 @@ async function login() {
     // console.log(validCredentials);
 
     // Check if the provided username and password match any valid credentials
-        const isValidUser = validCredentials.some(user => user.username === username && user.password === password);
+        const isValidUser = users.some(user => user.username === username && user.password === password);
 
         if (isValidUser) {
             // Redirect to 'my-playlists.html' since login is successful
@@ -53,7 +52,8 @@ async function login() {
                 errorMessageElement.innerText = ''; // Clear the message for the next attempt
             }, 3000); // Hide the message after 3 seconds
         }
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log("Error when logging in from Node.")
     }
 }
@@ -71,7 +71,6 @@ async function register() {
         const response = await fetch('/api/users', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Doesnt matter',
         });
   
         // Store what the service gave us as the high scores
@@ -79,6 +78,7 @@ async function register() {
         localStorage.setItem('users', JSON.stringify(users));
 
         // Check if the provided username and password match any valid credentials
+        console.log(users);     // testing
         const sameUsername = users.some(user => user.username === username);
 
         if (sameUsername) {
@@ -94,12 +94,13 @@ async function register() {
             setTimeout(() => {
                 errorMessageElement.style.display = 'none';
                 errorMessageElement.innerText = ''; // Clear the message for the next attempt
-            }, 3000); // Hide the message after 3 secondsc
+            }, 3000); // Hide the message after 3 seconds
         } else {
             let user = {'username': username, 'password': password, 'playlists': []}
             users.push(user);
             //localStorage.setItem('valid-credentials', JSON.stringify(validCredentials));
             //localStorage.setItem(username, JSON.stringify({'name': username, 'playlists': []}));
+            console.log(JSON.stringify(user));
 
             const response2 = await fetch('/api/updateUsers', {
                 method: 'POST',
@@ -107,16 +108,17 @@ async function register() {
                 body: JSON.stringify(user),
               });
         
-              // Store what the service gave us as the high scores
               const users2 = await response2.json();
               localStorage.setItem('users', JSON.stringify(users2));
+              console.log(users2);      // testing
 
             //console.log("profile: " + localStorage.getItem(username));
             console.log("Registered and logged in as", username);
             // Redirect to 'my-playlists.html' since login is successful
             window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
         }
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log("Error when registering from Node.")
     }
 }

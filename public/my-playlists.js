@@ -20,6 +20,7 @@ function showPopup() {
 }
 
 async function createPlaylist() {
+    console.log("Got here");        // testing
     const playlistName = document.getElementById('playlistName').value;
     const playlistDescription = document.getElementById('playlistDescription').value;
     const username = getQueryParam('username');
@@ -35,14 +36,16 @@ async function createPlaylist() {
             const response = await fetch('/api/users', {
               method: 'GET',
               headers: {'content-type': 'application/json'},
-              body: 'Doesnt matter',
             });
       
             // Store what the service gave us as the high scores
             const users = await response.json();
+            console.log(users);     // testing
+            
             localStorage.setItem('users', JSON.stringify(users));
             let profile = users.filter((item) => item.username === username)[0];
             profile['playlists'].push(randomID);
+            console.log(profile);       // testing
 
             const response2 = await fetch('/api/updateUsers', {
                 method: 'POST',
@@ -50,11 +53,11 @@ async function createPlaylist() {
                 body: JSON.stringify(profile),
               });
         
-              // Store what the service gave us as the high scores
               const users2 = await response2.json();
               localStorage.setItem('users', JSON.stringify(users2));
 
-        } catch {
+        } catch (e) {
+            console.log(e);
             console.log("Error when getting users (while adding new playlist) from Node.")
         }
 
@@ -65,10 +68,10 @@ async function createPlaylist() {
               body: JSON.stringify({'playlistID': randomID, 'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []}),
             });
       
-            // Store what the service gave us as the high scores
             const playlists = await response.json();
             localStorage.setItem('playlists', JSON.stringify(playlists));
-        } catch {
+        } catch (e) {
+            console.log(e);
             console.log("Error when updating playlists (adding new) from Node.")
         }
 
@@ -80,6 +83,7 @@ async function createPlaylist() {
 }
 
 function createAndReload() {
+    console.log("Got here");        // testing
     createPlaylist();
     const username = getQueryParam('username');
     window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
@@ -125,18 +129,19 @@ async function displayPlaylists() {
         const response = await fetch('/api/users', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Doesnt matter',
         });
-  
+        
         // Store what the service gave us as the high scores
-        const users = await response.json();
+        let users = await response.json();        console.log(users);     // testing
+        //users = users.json();
         localStorage.setItem('users', JSON.stringify(users));
-        const playlists = users.filter((item) => item.username === username)[0]['playlists'];
+        const userPlaylists = users.filter((item) => item.username === username)[0]['playlists'];
+        console.log(userPlaylists);     // testing
+        
         
         const addPlaylistCard = document.getElementById("new-playlist-card");
-        if (playlists.length === 0) {
+        if (userPlaylists.length === 0) {
             addPlaylistCard.style.borderRadius = '5rem';
-            console.log(addPlaylistCard.style.borderRadius)
         }
         else {
             addPlaylistCard.style.borderRadius = 'none';
@@ -144,12 +149,11 @@ async function displayPlaylists() {
 
         // Iterate over the talkList and create/display talk elements
         let index = 0;
-        playlists.forEach(async (playlistID) => {
+        userPlaylists.forEach(async (playlistID) => {
             console.log("Displaying playlist:", playlistID);
             const response = await fetch('/api/playlists', {
                 method: 'GET',
                 headers: {'content-type': 'application/json'},
-                body: 'Does this matter?',
             });
             const playlists = await response.json();
             localStorage.setItem('playlists', JSON.stringify(playlists));
@@ -190,12 +194,10 @@ async function displayPlaylists() {
             talkListContainer.appendChild(card);
             index = index + 1;
         });
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log("Error when displaying playlists from Node.")
     }
-
-
-    
 }
 
 

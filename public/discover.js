@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
             let talks = await response.json();
             localStorage.setItem('talks', JSON.stringify(talks));
         //localStorage.setItem("talk-" + talk['talkName'], JSON.stringify(talk));
-        } catch {
+        } catch (e) {
+            console.log(e);
             console.log("Error when loading Discover page from Node.")
         }
     })
@@ -43,7 +44,6 @@ function addTalk(talkName, selected) {
             const response = await fetch('/api/playlists', {
                 method: 'GET',
                 headers: {'content-type': 'application/json'},
-                body: 'Does this matter?',
             });
             const playlists = await response.json();
             localStorage.setItem('playlists', JSON.stringify(playlists));
@@ -52,7 +52,6 @@ function addTalk(talkName, selected) {
             const response2 = await fetch('/api/talks', {
                 method: 'GET',
                 headers: {'content-type': 'application/json'},
-                body: 'Does this matter?',
             });
             const talks = await response2.json();
             localStorage.setItem('talks', JSON.stringify(talks));
@@ -73,7 +72,8 @@ function addTalk(talkName, selected) {
 
             //localStorage.setItem(playlistID, JSON.stringify(playlist));
             console.log(talkName, "added to ", playlistID.toString());
-        } catch {
+        } catch (e) {
+            console.log(e);
             console.log("Error when loading Discover page from Node.")
         }
         
@@ -95,32 +95,33 @@ async function showPopup(talkName, selected) {
         const response = await fetch('/api/users', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Doesnt matter',
         });
   
         // Store what the service gave us as the high scores
         let users = await response.json();
         localStorage.setItem('users', JSON.stringify(users));
-        const playlists = users.filter((item) => item.username === username)[0]['playlists'];
+        const userPlaylists = users.filter((item) => item.username === username)[0]['playlists'];
         //const playlists = profile['playlists'];
+
+        const response2 = await fetch('/api/playlists', {
+            method: 'GET',
+            headers: {'content-type': 'application/json'},
+        });
+        const playlists = await response2.json();
+        localStorage.setItem('playlists', JSON.stringify(playlists));
 
         if (playlists.length === 0) {
             alert("You don't have any playlists! Please make a playlist and then try again.");
+            cancel();
             return;
         }
     
         let index = 0
         let entries = [];
-        playlists.forEach(async (playlistID) => {
+        userPlaylists.forEach(async (playlistID) => {
             //const playlist = JSON.parse(localStorage.getItem(playlistID));
-            const response = await fetch('/api/playlists', {
-                method: 'GET',
-                headers: {'content-type': 'application/json'},
-                body: 'Does this matter?',
-            });
-            const playlists = await response.json();
-            localStorage.setItem('playlists', JSON.stringify(playlists));
-            const playlist = playlists.filter((item) => item.playlistID === playlistID)[0]
+           
+            const playlist = userPlaylists.filter((item) => item.playlistID === playlistID)[0]
     
             let playlistButton = document.getElementById("playlist-option-" + index.toString());
             if (!playlistButton) {
@@ -183,7 +184,8 @@ async function showPopup(talkName, selected) {
         // Display the popup
         popup.style.display = 'block';
 
-        } catch {
+        } catch (e) {
+            console.log(e);
             console.log("Error when logging in from Node.")
         }
 }
@@ -212,10 +214,9 @@ async function displayTalks() {
     const response2 = await fetch('/api/talks', {
         method: 'GET',
         headers: {'content-type': 'application/json'},
-        body: 'Does this matter?',
     });
     const talkList = await response2.json();
-    localStorage.setItem('talks', JSON.stringify(talks));
+    localStorage.setItem('talks', JSON.stringify(talkList));
 
     //const talkList = JSON.parse(localStorage.getItem("all-talks"));
     talkList.forEach(talk => {

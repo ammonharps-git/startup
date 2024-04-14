@@ -12,13 +12,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         const response = await fetch('/api/playlists', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Does this matter?',
         });
   
         // Store what the service gave us as the high scores
         const playlists = await response.json();
         localStorage.setItem('playlists', JSON.stringify(playlists));
-        let playlist = playlists.filter((item) => item.playlistID === playlistID)[0]['playlistName']
+        let playlistName = playlists.filter((item) => item.playlistID === playlistID)[0]['playlistName']
         //const playlistName = JSON.parse(localStorage.getItem(playlistID))['playlistName'];
         document.getElementById('playlistName').innerText = playlistName;
         var editIcon = document.getElementById('edit-icon');
@@ -37,7 +36,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             };
         }
         displayTalks(mode);
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log("Error when loading page from Node.")
     }
     
@@ -53,7 +53,6 @@ async function removeTalk(talkName) {
         const response = await fetch('/api/playlists', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Does this matter?',
         });
   
         // Store what the service gave us as the high scores
@@ -80,7 +79,8 @@ async function removeTalk(talkName) {
 
         // Update screen
         displayTalks(mode);
-    } catch {
+    } catch (e) {
+        console.log(e);
         console.log("Error when removing playlist from Node.")
     }
 }
@@ -116,7 +116,6 @@ async function displayTalks(mode) {
         const response = await fetch('/api/playlists', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
-          body: 'Does this matter?',
         });
   
         // Store what the service gave us as the high scores
@@ -163,8 +162,8 @@ async function displayTalks(mode) {
             }
             talkListContainer.appendChild(talkContainer);
         });
-      } catch {
-        // If there was an error then just track scores locally
+      } catch (e) {
+        console.log(e);
         console.log("Error when getting playlist info from Node.")
       }
 }
