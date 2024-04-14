@@ -80,7 +80,7 @@ function updatePlaylists(newPlaylist, playlists) {
 }
 
 function updateTalks(newTalk, talks) {
-  talks = talks.filter((item) => item.talkID != newTalk.talkID)
+  talks = talks.filter((item) => item.talkName != newTalk.talkName)
   talks.push(newTalk);
   return talks;
 }

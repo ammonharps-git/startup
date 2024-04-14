@@ -65,9 +65,9 @@ function addTalk(talkName, selected) {
             const response3 = await fetch('/api/updatePlaylists', {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
-                body: JSON.stringify(playlists),
+                body: JSON.stringify(playlist),
             });
-            const playlists3 = await response.json();
+            const playlists3 = await response3.json();
             localStorage.setItem('playlists', JSON.stringify(playlists3));
 
             //localStorage.setItem(playlistID, JSON.stringify(playlist));
@@ -121,7 +121,7 @@ async function showPopup(talkName, selected) {
         userPlaylists.forEach(async (playlistID) => {
             //const playlist = JSON.parse(localStorage.getItem(playlistID));
            
-            const playlist = userPlaylists.filter((item) => item.playlistID === playlistID)[0]
+            const playlist = playlists.filter((item) => item.playlistID === playlistID)[0]
     
             let playlistButton = document.getElementById("playlist-option-" + index.toString());
             if (!playlistButton) {

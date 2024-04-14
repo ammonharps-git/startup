@@ -159,6 +159,11 @@ async function displayPlaylists() {
             localStorage.setItem('playlists', JSON.stringify(playlists));
             const playlist = playlists.filter((item) => item.playlistID === playlistID)[0]
             //const playlist = JSON.parse(localStorage.getItem(playlistID));
+
+            
+
+
+
             const card = document.createElement('span');
             card.id = `card${index + 1}`;
             card.className = 'card';
