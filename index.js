@@ -1,96 +1,80 @@
+const express = require('express');
+const app = express();
 
-function login() {
+// The service port. In production the front-end code is statically hosted by the service on the same port.
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-    // Get the username and password that the user entered
-    var username = document.getElementById("typeUsernameX").value;
-    var password = document.getElementById("typePasswordX").value;
+// JSON body parsing using built-in middleware
+app.use(express.json());
 
-    // PLACEHOLDER
-    // Set the local storage initial value
-    if (!localStorage.getItem('valid-credentials')) {
-        localStorage.setItem('valid-credentials', JSON.stringify([]));
-    }
-    // Retrieve valid credentials from local storage
-    let validCredentials = [];
-    try {
-        const storedCredentials = localStorage.getItem('valid-credentials');
-        if (storedCredentials) {
-            validCredentials = JSON.parse(storedCredentials);
-        }
-    } catch (error) {
-        console.error('Error parsing JSON from localStorage:', error);
-    }
-    console.log(validCredentials);
+// Serve up the front-end static content hosting
+app.use(express.static('public'));
 
-    // Check if the provided username and password match any valid credentials
-    const isValidUser = validCredentials.some(cred => cred.username === username && cred.password === password);
+// Router for service endpoints
+var apiRouter = express.Router();
+app.use(`/api`, apiRouter);
 
-    if (isValidUser) {
-        // Redirect to 'my-playlists.html' since login is successful
-        window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
-    } else {
-        // Clear username and password
-        document.getElementById("typeUsernameX").value = '';
-        document.getElementById("typePasswordX").value = '';
+// get users
+apiRouter.get('/users', (_req, res) => {
+  res.send(users);
+});
 
-        // Display error message and hide it after 3 seconds
-        const errorMessageElement = document.getElementById('errorMessage');
-        errorMessageElement.innerText = 'Invalid username or password. Please try again.';
-        errorMessageElement.style.display = 'block';
+// get playlists
+apiRouter.get('/playlists', (_req, res) => {
+    res.send(playlists);
+  });
 
-        setTimeout(() => {
-            errorMessageElement.style.display = 'none';
-            errorMessageElement.innerText = ''; // Clear the message for the next attempt
-        }, 3000); // Hide the message after 3 seconds
-    }
+// get talks
+apiRouter.get('/talks', (_req, res) => {
+    res.send(talks);
+  });
+
+// Register new user
+apiRouter.post('/register', (req, res) => {
+  users = updateUsers(req.body);
+  res.send(users);
+});
+
+// Update talks
+apiRouter.post('/updateTalks', (req, res) => {
+  talks = updateTalks(req.body);
+  res.send(talks);
+});
+
+// Add new playlist
+apiRouter.post('/updatePlaylists', (req, res) => {
+  playlists = updatePlaylists(req.body, playlists);
+  res.send(playlists);
+});
+
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+// Users, Playlists, and talks are saved in memory and disappear whenever the service is restarted.
+let users = [];
+let playlists = [];
+let talks = [];
+
+function updateUsers(newUser) {
+  users = users.filter((item) => item.username != newUser.username)
+  users.push(newUser);
+  return users;
 }
 
-function register() {
-    // Get the username and password that the user entered
-    var username = document.getElementById("typeUsernameX").value;
-    var password = document.getElementById("typePasswordX").value;
+function updatePlaylists(newPlaylist, playlists) {
+  playlists = playlists.filter((item) => item.playlistID != newPlaylist.playlistID)
+  playlists.push(newPlaylist);
+  return playlists;
+}
 
-    // PLACEHOLDER
-    // Set the local storage initial value
-    if (!localStorage.getItem('valid-credentials')) {
-        localStorage.setItem('valid-credentials', JSON.stringify([]));
-    }
-    // Retrieve valid credentials from local storage
-    let validCredentials = [];
-    try {
-        const storedCredentials = localStorage.getItem('valid-credentials');
-        if (storedCredentials) {
-            validCredentials = JSON.parse(storedCredentials);
-        }
-    } catch (error) {
-        console.error('Error parsing JSON from localStorage:', error);
-    }
-    console.log(validCredentials);
-
-    // Check if the provided username and password match any valid credentials
-    const sameUsername = validCredentials.some(cred => cred.username === username);
-
-    if (sameUsername) {
-        // Clear username and password
-        document.getElementById("typeUsernameX").value = '';
-        document.getElementById("typePasswordX").value = '';
-
-        // Display error message and hide it after 3 seconds
-        const errorMessageElement = document.getElementById('errorMessage');
-        errorMessageElement.innerText = 'Sorry, that username is already taken. Please try again.';
-        errorMessageElement.style.display = 'block';
-
-        setTimeout(() => {
-            errorMessageElement.style.display = 'none';
-            errorMessageElement.innerText = ''; // Clear the message for the next attempt
-        }, 3000); // Hide the message after 3 secondsc
-    } else {
-        validCredentials.push({'username': username, 'password': password});
-        localStorage.setItem('valid-credentials', JSON.stringify(validCredentials));
-        localStorage.setItem(username, JSON.stringify({'name': username, 'playlists': []}));
-        console.log("profile: " + localStorage.getItem(username));
-        console.log("Registered and logged in as", username);
-        // Redirect to 'my-playlists.html' since login is successful
-        window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
-    }
+function updateTalks(newTalk) {
+  talks = talks.filter((item) => item.talkID != newTalk.talkID)
+  talks.push(newTalk);
+  return talks;
 }
