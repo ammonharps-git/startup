@@ -60,8 +60,8 @@ async function login() {
 
 async function register() {
     // Get the username and password that the user entered
-    var username = document.getElementById("typeUsernameX").value;
-    var password = document.getElementById("typePasswordX").value;
+    var typed_username = document.getElementById("typeUsernameX").value;
+    var typed_password = document.getElementById("typePasswordX").value;
 
     // Set the local storage initial value
     // if (!localStorage.getItem('valid-credentials')) {
@@ -81,7 +81,15 @@ async function register() {
         // console.log(users);     // testing
         // const sameUsername = users.some(user => user.username === username);
 
-        if (sameUsername) {
+        const response = await fetch('api/auth/create', {
+            method: 'post',
+            body: JSON.stringify({ username: typed_username, password: typed_password }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          });
+        
+        if (!response.ok) {
             // Clear username and password
             document.getElementById("typeUsernameX").value = '';
             document.getElementById("typePasswordX").value = '';
@@ -96,21 +104,21 @@ async function register() {
                 errorMessageElement.innerText = ''; // Clear the message for the next attempt
             }, 3000); // Hide the message after 3 seconds
         } else {
-            let user = {'username': username, 'password': password, 'playlists': []}
-            users.push(user);
-            //localStorage.setItem('valid-credentials', JSON.stringify(validCredentials));
-            //localStorage.setItem(username, JSON.stringify({'name': username, 'playlists': []}));
-            console.log(JSON.stringify(user));
+            // let user = {'username': username, 'password': password, 'playlists': []}
+            // users.push(user);
+            // //localStorage.setItem('valid-credentials', JSON.stringify(validCredentials));
+            // //localStorage.setItem(username, JSON.stringify({'name': username, 'playlists': []}));
+            // console.log(JSON.stringify(user));
 
-            const response2 = await fetch('/api/updateUsers', {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(user),
-              });
+            // const response2 = await fetch('/api/updateUsers', {
+            //     method: 'POST',
+            //     headers: {'content-type': 'application/json'},
+            //     body: JSON.stringify(user),
+            //   });
         
-              const users2 = await response2.json();
-              localStorage.setItem('users', JSON.stringify(users2));
-              console.log(users2);      // testing
+            //   const users2 = await response2.json();
+            //   localStorage.setItem('users', JSON.stringify(users2));
+            //   console.log(users2);      // testing
 
             //console.log("profile: " + localStorage.getItem(username));
             console.log("Registered and logged in as", username);

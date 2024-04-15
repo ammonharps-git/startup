@@ -1,8 +1,12 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "uuid": "^9.0.1"
   },
   "name": "startup",
   "description": "Everyone's listened to someone giving a speach. Maybe you were sitting in the far back. You could hear the crowd laugh, but you couldn't hear the joke. You turn to your neighbor: \"What did they say?\" Well, NO MORE! Talks (TM) is a new application designed to bring the speaker to you. With Talks (TM) you can save all of your favoirte talks by your favorite speakers. Then, you can share what you love by creating a collabrotive playlist of speaches with all your friends. Inspiration has never been easier.",
