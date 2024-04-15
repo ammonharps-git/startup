@@ -68,18 +68,18 @@ async function register() {
     //     localStorage.setItem('valid-credentials', JSON.stringify([]));
     // }
     try {
-        const response = await fetch('/api/users', {
-          method: 'GET',
-          headers: {'content-type': 'application/json'},
-        });
+        // const response = await fetch('/api/users', {
+        //   method: 'GET',
+        //   headers: {'content-type': 'application/json'},
+        // });
   
-        // Store what the service gave us as the high scores
-        let users = await response.json();
-        localStorage.setItem('users', JSON.stringify(users));
+        // // Store what the service gave us as the high scores
+        // let users = await response.json();
+        // localStorage.setItem('users', JSON.stringify(users));
 
-        // Check if the provided username and password match any valid credentials
-        console.log(users);     // testing
-        const sameUsername = users.some(user => user.username === username);
+        // // Check if the provided username and password match any valid credentials
+        // console.log(users);     // testing
+        // const sameUsername = users.some(user => user.username === username);
 
         if (sameUsername) {
             // Clear username and password

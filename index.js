@@ -1,3 +1,6 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
+const DB = require('./database.js');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -8,6 +11,9 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
+// Use the cookie parser middleware for tracking authentication tokens
+app.use(cookieParser());
+
 // CORS middleware to allow requests from specific origin
 app.use(cors({
   origin: ['http://localhost:3000', 'https://startup.listentotalks.click'] // Replace with your allowed origin(s)
@@ -15,6 +21,9 @@ app.use(cors({
 
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
+
+// Trust headers that are forwarded from the proxy so we can determine IP addresses
+app.set('trust proxy', true);
 
 // Router for service endpoints
 var apiRouter = express.Router();
@@ -38,7 +47,36 @@ apiRouter.get('/talks', (_req, res) => {
     res.send(JSON.stringify(talks));
   });
 
-// Register new user
+// CreateAuth token for a new user
+apiRouter.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.username)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DB.createUser(req.body.email, req.body.password);
+
+    // Set the cookie
+    setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
+  }
+});
+
+// GetAuth token for the provided credentials
+apiRouter.post('/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.username);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+// Update users
 apiRouter.post('/updateUsers', (req, res) => {
   console.log("POST /updateUsers");   // testing
   users = updateUsers(req.body, users);
