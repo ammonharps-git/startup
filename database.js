@@ -48,7 +48,7 @@ function addUser(user) {
 }
 
 function removeUser(user) {
-  return userCollection.deleteOne({ username: user.username });
+  return userCollection.deleteOne({ _id: user._id });
 }
 
 function getUsers() {
@@ -61,7 +61,7 @@ function addPlaylist(playlist) {
 }
 
 function removePlaylist(playlist) {
-  playlistCollection.deleteOne({playlistName: playlist.playlistName});
+  playlistCollection.deleteOne({_id: playlist._id});
 }
 
 
@@ -74,7 +74,7 @@ function addTalk(talk) {
 }
 
 function removeTalk(talk) {
-  talkCollection.deleteOne({talkName: talk.talkName});
+  talkCollection.deleteOne({_id: talk._id});
 }
 
 function getTalks() {

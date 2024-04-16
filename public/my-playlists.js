@@ -84,8 +84,8 @@ async function createAndReload() {
     console.log("Got here");        // testing
     await createPlaylist();
     const username = getQueryParam('username');
-    //window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
-    await displayPlaylists();
+    window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
+    // await displayPlaylists();
 }
 
 function cancel() {

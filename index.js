@@ -61,7 +61,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   else {
     const user = await DB.createUser(req.body.username, req.body.password);
 
-    //setAuthCookie(res, user.token);
+    setAuthCookie(res, user.token);
 
     res.send({
       id: user._id,
@@ -113,12 +113,7 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-// Users, Playlists, and talks are saved in memory and disappear whenever the service is restarted.
-// let users = [];
-// let playlists = [];
-// let talks = [];
-
-async function updateUsers(newUser, users) {
+async function updateUsers(newUser) {
   DB.removeUser(newUser);
   DB.addUser(newUser);
   return await DB.getUsers();
