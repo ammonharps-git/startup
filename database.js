@@ -20,18 +20,6 @@ const talkCollection = db.collection('talk');
   process.exit(1);
 });
 
-function getUser(username) {
-  return userCollection.findOne({ username: username });
-}
-
-function getUserByToken(token) {
-  return userCollection.findOne({ token: token });
-}
-
-function getUsers() {
-  return userCollection.find({}).toArray();
-}
-
 async function createUser(username, password) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
@@ -47,9 +35,35 @@ async function createUser(username, password) {
   return user;
 }
 
+function getUser(username) {
+  return userCollection.findOne({ username: username });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
+function addUser(user) {
+  userCollection.insertOne(user);
+}
+
+function removeUser(user) {
+  return userCollection.deleteOne({ username: user.username });
+}
+
+function getUsers() {
+  const users = userCollection.find({}).toArray();
+  return users;
+}
+
 function addPlaylist(playlist) {
   playlistCollection.insertOne(playlist);
 }
+
+function removePlaylist(playlist) {
+  playlistCollection.deleteOne({playlistName: playlist.playlistName});
+}
+
 
 function getPlaylists() {
   return playlistCollection.find({}).toArray();
@@ -59,11 +73,16 @@ function addTalk(talk) {
   talkCollection.insertOne(talk);
 }
 
+function removeTalk(talk) {
+  talkCollection.deleteOne({talkName: talk.talkName});
+}
+
 function getTalks() {
   return talkCollection.find({}).toArray();
 }
 
 module.exports = {
+  addUser,
   getUser,
   getUserByToken,
   getUsers,
@@ -71,5 +90,8 @@ module.exports = {
   addPlaylist,
   getPlaylists,
   addTalk,
-  getTalks
+  getTalks,
+  removeUser,
+  removePlaylist,
+  removeTalk
 };

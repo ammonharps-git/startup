@@ -5,6 +5,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+const authCookieName = 'token';
+
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
@@ -30,32 +32,36 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // get users
-apiRouter.get('/users', (_req, res) => {
+apiRouter.get('/users', async (_req, res) => {
   console.log("GET  /users");   // testing
+  const users = await DB.getUsers();
   res.send(JSON.stringify(users));
 });
 
 // get playlists
-apiRouter.get('/playlists', (_req, res) => {
+apiRouter.get('/playlists', async (_req, res) => {
   console.log("GET  /playlists");   // testing
+    const playlists = await DB.getPlaylists();
     res.send(JSON.stringify(playlists));
   });
 
 // get talks
-apiRouter.get('/talks', (_req, res) => {
+apiRouter.get('/talks', async (_req, res) => {
   console.log("GET  /talks");   // testing
+    const talks = await DB.getTalks();
     res.send(JSON.stringify(talks));
   });
 
 // CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
+  console.log("POST  /auth/create");   // testing
   if (await DB.getUser(req.body.username)) {
     res.status(409).send({ msg: 'Existing user' });
   } 
   else {
     const user = await DB.createUser(req.body.username, req.body.password);
 
-    setAuthCookie(res, user.token);
+    //setAuthCookie(res, user.token);
 
     res.send({
       id: user._id,
@@ -65,6 +71,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 // GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
+  console.log("POST  /auth/login");   // testing
   const user = await DB.getUser(req.body.username);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
@@ -79,21 +86,21 @@ apiRouter.post('/auth/login', async (req, res) => {
 // Update users
 apiRouter.post('/updateUsers', (req, res) => {
   console.log("POST /updateUsers");   // testing
-  users = updateUsers(req.body, users);
+  users = updateUsers(req.body);
   res.send(users);
 });
 
 // Update talks
 apiRouter.post('/updateTalks', (req, res) => {
   console.log("POST /updateTalks");   // testing
-  talks = updateTalks(req.body, talks);
+  talks = updateTalks(req.body);
   res.send(talks);
 });
 
 // Add new playlist
 apiRouter.post('/updatePlaylists', (req, res) => {
   console.log("POST /updatePlaylists");   // testing
-  playlists = updatePlaylists(req.body, playlists);
+  playlists = updatePlaylists(req.body);
   res.send(playlists);
 });
 
@@ -107,24 +114,33 @@ app.listen(port, () => {
 });
 
 // Users, Playlists, and talks are saved in memory and disappear whenever the service is restarted.
-let users = [];
-let playlists = [];
-let talks = [];
+// let users = [];
+// let playlists = [];
+// let talks = [];
 
-function updateUsers(newUser, users) {
-  users = users.filter((item) => item.username != newUser.username)
-  users.push(newUser);
-  return users;
+async function updateUsers(newUser, users) {
+  DB.removeUser(newUser);
+  DB.addUser(newUser);
+  return await DB.getUsers();
 }
 
-function updatePlaylists(newPlaylist, playlists) {
-  playlists = playlists.filter((item) => item.playlistID != newPlaylist.playlistID)
-  playlists.push(newPlaylist);
-  return playlists;
+async function updatePlaylists(newPlaylist) {
+  DB.removePlaylist(newPlaylist);
+  DB.addPlaylist(newPlaylist);
+  return await DB.getPlaylists();
 }
 
-function updateTalks(newTalk, talks) {
-  talks = talks.filter((item) => item.talkName != newTalk.talkName)
-  talks.push(newTalk);
-  return talks;
+async function updateTalks(newTalk) {
+  DB.removeTalk(newTalk);
+  DB.addTalk(newTalk);
+  return await DB.getTalks();;
+}
+
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
 }

@@ -26,7 +26,6 @@ async function createPlaylist() {
     const username = getQueryParam('username');
     if (playlistName.trim() !== '') {
         const randomID = "playlist-" + generateRandomString(20);
-        const username = getQueryParam('username');
         //console.log(localStorage.getItem(username));
         //localStorage.setItem(JSON.stringify({'playlistID': randomID, 'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []}));
         
@@ -38,14 +37,13 @@ async function createPlaylist() {
               headers: {'content-type': 'application/json'},
             });
       
-            // Store what the service gave us as the high scores
-            const users = await response.json();
-            console.log(users);     // testing
+            let users = await response.json();
+            console.log("All users:", users);     // testing
             
             localStorage.setItem('users', JSON.stringify(users));
             let profile = users.filter((item) => item.username === username)[0];
             profile['playlists'].push(randomID);
-            console.log(profile);       // testing
+            console.log("updated user profile:", profile);       // testing
 
             const response2 = await fetch('/api/updateUsers', {
                 method: 'POST',
@@ -68,7 +66,7 @@ async function createPlaylist() {
               body: JSON.stringify({'playlistID': randomID, 'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []}),
             });
       
-            const playlists = await response.json();
+            let playlists = await response.json();
             localStorage.setItem('playlists', JSON.stringify(playlists));
         } catch (e) {
             console.log(e);
@@ -82,11 +80,12 @@ async function createPlaylist() {
     hidePopup();
 }
 
-function createAndReload() {
+async function createAndReload() {
     console.log("Got here");        // testing
-    createPlaylist();
+    await createPlaylist();
     const username = getQueryParam('username');
-    window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
+    //window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
+    await displayPlaylists();
 }
 
 function cancel() {
@@ -132,11 +131,14 @@ async function displayPlaylists() {
         });
         
         // Store what the service gave us as the high scores
-        let users = await response.json();        console.log(users);     // testing
+        let users = await response.json();
+        //let users = users_text.json();
+
+        console.log("users", users);     // testing
         //users = users.json();
         localStorage.setItem('users', JSON.stringify(users));
         const userPlaylists = users.filter((item) => item.username === username)[0]['playlists'];
-        console.log(userPlaylists);     // testing
+        console.log("userplaylists:", userPlaylists);     // testing
         
         
         const addPlaylistCard = document.getElementById("new-playlist-card");
@@ -164,7 +166,7 @@ async function displayPlaylists() {
                 method: 'GET',
                 headers: {'content-type': 'application/json'},
             });
-            const imageData = await reply;
+            const imageData = reply;
             const imageUrl = imageData.download_url || imageData.url; 
 
 

@@ -121,9 +121,9 @@ async function register() {
             //   console.log(users2);      // testing
 
             //console.log("profile: " + localStorage.getItem(username));
-            console.log("Registered and logged in as", username);
+            console.log("Registered and logged in as", typed_username);
             // Redirect to 'my-playlists.html' since login is successful
-            window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
+            window.location.href = `my-playlists.html?username=${encodeURIComponent(typed_username)}`;
         }
     } catch (e) {
         console.log(e);
