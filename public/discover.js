@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     displayTalks();
 });
 
-function addTalk(talkName, selected) {
+async function addTalk(talkName, selected) {
     const username = getQueryParam('username');
 
     selected.forEach(async (playlistID) => {
@@ -57,9 +57,6 @@ function addTalk(talkName, selected) {
             localStorage.setItem('talks', JSON.stringify(talks));
             const talk = talks.filter((item) => item.talkName === talkName)[0]
 
-
-            //const talk = JSON.parse(localStorage.getItem("talk-" + talkName));
-            //let playlist = JSON.parse(localStorage.getItem(playlistID));
             playlist['talks'].push(talk);
 
             const response3 = await fetch('/api/updatePlaylists', {
@@ -71,7 +68,7 @@ function addTalk(talkName, selected) {
             localStorage.setItem('playlists', JSON.stringify(playlists3));
 
             //localStorage.setItem(playlistID, JSON.stringify(playlist));
-            console.log(talkName, "added to ", playlistID.toString());
+            console.log(talkName, "added to ", playlist.playlistName);
         } catch (e) {
             console.log(e);
             console.log("Error when loading Discover page from Node.")
@@ -135,7 +132,7 @@ async function showPopup(talkName, selected) {
             }
             playlistButton.textContent = playlist['playlistName'];
             
-            playlistButton.onclick = () => {
+            playlistButton.onclick = async () => {
                 playlistButton.toggleAttribute('active');
                 if (playlistButton.hasAttribute('active')) {
                     playlistButton.classList.add('active');
@@ -165,7 +162,7 @@ async function showPopup(talkName, selected) {
         const addButton = document.createElement('button');
         addButton.textContent = 'Add';
         addButton.className = 'btn btn-primary';
-        addButton.onclick = () => addTalk(talkName, selected);
+        addButton.onclick = async () => await addTalk(talkName, selected);
     
         const cancelButton = document.createElement('button');
         cancelButton.textContent = 'Cancel';
@@ -186,7 +183,7 @@ async function showPopup(talkName, selected) {
 
         } catch (e) {
             console.log(e);
-            console.log("Error when logging in from Node.")
+            console.log("Error when showing popup from Node.")
         }
 }
 

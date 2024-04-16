@@ -31,6 +31,16 @@ app.set('trust proxy', true);
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+// apiRouter.use(async (req, res, next) => {
+//   authToken = req.cookies[authCookieName];
+//   const user = await DB.getUserByToken(authToken);
+//   if (user) {
+//     next();
+//   } else {
+//     res.status(401).send({ msg: 'Unauthorized' });
+//   }
+// });
+
 // get users
 apiRouter.get('/users', async (_req, res) => {
   console.log("GET  /users");   // testing
@@ -60,9 +70,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   } 
   else {
     const user = await DB.createUser(req.body.username, req.body.password);
-
     setAuthCookie(res, user.token);
-
     res.send({
       id: user._id,
     });
@@ -84,21 +92,27 @@ apiRouter.post('/auth/login', async (req, res) => {
 });
 
 // Update users
-apiRouter.post('/updateUsers', (req, res) => {
-  console.log("POST /updateUsers");   // testing
+apiRouter.post('/updateUsers', async (req, res) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    console.log("POST /updateUsers");   // testing
   users = updateUsers(req.body);
   res.send(users);
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
 });
 
 // Update talks
-apiRouter.post('/updateTalks', (req, res) => {
+apiRouter.post('/updateTalks', async (req, res) => {
   console.log("POST /updateTalks");   // testing
   talks = updateTalks(req.body);
   res.send(talks);
 });
 
 // Add new playlist
-apiRouter.post('/updatePlaylists', (req, res) => {
+apiRouter.post('/updatePlaylists', async (req, res) => {
   console.log("POST /updatePlaylists");   // testing
   playlists = updatePlaylists(req.body);
   res.send(playlists);
@@ -114,20 +128,20 @@ app.listen(port, () => {
 });
 
 async function updateUsers(newUser) {
-  DB.removeUser(newUser);
-  DB.addUser(newUser);
+  await DB.removeUser(newUser);
+  await DB.addUser(newUser);
   return await DB.getUsers();
 }
 
 async function updatePlaylists(newPlaylist) {
-  DB.removePlaylist(newPlaylist);
-  DB.addPlaylist(newPlaylist);
+  await DB.removePlaylist(newPlaylist);
+  await DB.addPlaylist(newPlaylist);
   return await DB.getPlaylists();
 }
 
 async function updateTalks(newTalk) {
-  DB.removeTalk(newTalk);
-  DB.addTalk(newTalk);
+  await DB.removeTalk(newTalk);
+  await DB.addTalk(newTalk);
   return await DB.getTalks();;
 }
 

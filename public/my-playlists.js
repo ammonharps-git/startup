@@ -1,3 +1,4 @@
+let token = '';
 
 // Display the username at the top of welcome banner
 document.addEventListener('DOMContentLoaded', function () {

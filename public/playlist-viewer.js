@@ -23,14 +23,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         var editIcon = document.getElementById('edit-icon');
         if (mode === 'view') {
             editIcon.src = "edit-icon.png"
-            editIcon.onclick = function() {
+            editIcon.onclick = async function() {
                 // Call the viewPlaylist function with the playlistName and 'edit' as parameters
                 viewPlaylist(playlistID, 'edit');
             };
         }
         else {
             editIcon.src = "checkmark.png"
-            editIcon.onclick = function() {
+            editIcon.onclick = async function() {
                 // Call the viewPlaylist function with the playlistName and 'view' as parameters
                 viewPlaylist(playlistID, 'view');
             };
@@ -153,7 +153,7 @@ async function displayTalks(mode) {
                 buttonsContainer.className = 'buttons-container';
         
                 //const addButton = createButton('Add to other playlist', () => addTalk(talk.name));
-                const removeButton = createButton('Remove', () => removeTalk(talk.talkName));
+                const removeButton = createButton('Remove', async () => removeTalk(talk.talkName));
         
                 //buttonsContainer.appendChild(addButton);
                 buttonsContainer.appendChild(removeButton);
