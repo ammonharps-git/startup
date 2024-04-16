@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const { ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const config = require('./dbConfig.json');
@@ -48,7 +49,7 @@ function addUser(user) {
 }
 
 function removeUser(user) {
-  return userCollection.deleteOne({ _id: user._id });
+  return userCollection.deleteOne({ '_id': new ObjectId(user._id)});
 }
 
 function getUsers() {
@@ -61,7 +62,7 @@ function addPlaylist(playlist) {
 }
 
 function removePlaylist(playlist) {
-  playlistCollection.deleteOne({_id: playlist._id});
+  playlistCollection.deleteOne({'playlistID': playlist.playlistID});
 }
 
 
@@ -74,7 +75,7 @@ function addTalk(talk) {
 }
 
 function removeTalk(talk) {
-  talkCollection.deleteOne({_id: talk._id});
+  talkCollection.deleteOne({'talkName': talk.talkName});
 }
 
 function getTalks() {

@@ -137,9 +137,12 @@ async function displayPlaylists() {
         console.log("users", users);     // testing
         //users = users.json();
         localStorage.setItem('users', JSON.stringify(users));
-        const userPlaylists = users.filter((item) => item.username === username)[0]['playlists'];
+        const userList = users.filter((item) => item.username === username);
+        console.log("userList", userList);     // testing
+        const user = userList[0];
+        console.log("user", user);     // testing
+        const userPlaylists = user['playlists'];
         console.log("userplaylists:", userPlaylists);     // testing
-        
         
         const addPlaylistCard = document.getElementById("new-playlist-card");
         if (userPlaylists.length === 0) {
