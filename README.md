@@ -78,6 +78,20 @@ Talks (TM) will be ported to use the React web framework.
 [x] - done - 20% - Your backend provides service endpoints
 [x] - done - 20% - Your frontend calls your service endpoints
 
+# Login Database Deliverable
+
+[x] - done - Prerequisite: Simon Login deployed to your production environment with your dbConfig.json credentials
+[x] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+[x] - done - Prerequisite: Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable. 
+[x] - done - Prerequisite: At least 10 git commits spread consistently throughout the assignment period.
+[x] - done - Application authentication and authorization
+[x] - done - 20% - Supports new user registration
+[x] - done - 20% - Supports existing user authentication
+[x] - done - 20% - Stores application data in MongoDB
+[x] - done - 20% - Stores and retrieves credentials in MongoDB
+[x] - done - 20% - Restricts application functionality based upon authentication (required to update users in database)
+
+
 # Application sketches
 
 ![Login page](./talks-login.png)
