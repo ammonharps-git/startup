@@ -28,12 +28,12 @@ function showPopup() {
 }
 
 async function createPlaylist() {
-    console.log("Got here");        // testing
     const playlistName = document.getElementById('playlistName').value;
     const playlistDescription = document.getElementById('playlistDescription').value;
     const username = getQueryParam('username');
     if (playlistName.trim() !== '') {
         const randomID = "playlist-" + generateRandomString(20);
+        const playlist = {'playlistID': randomID, 'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []};
         try {
             const response = await fetch('/api/users', {
               method: 'GET',
@@ -42,6 +42,8 @@ async function createPlaylist() {
       
             let users = await response.json();
             console.log("All users:", users);     // testing
+
+            // TODO the issue seems to be with timing, since when I step through the process, it adds the playlists just fine. Try huntinf for an async or await that needs to be added somewhere up the chain before this function.
             
             localStorage.setItem('users', JSON.stringify(users));
             let profile = users.filter((item) => item.username === username)[0];
@@ -58,25 +60,25 @@ async function createPlaylist() {
               localStorage.setItem('users', JSON.stringify(users2));
 
         } catch (e) {
-            console.log(e);
-            console.log("Error when getting users (while adding new playlist) from Node.")
+          console.log(e);
+          console.log("Error when getting users (while adding new playlist) from Node.")
         }
-
         try {
-            const response = await fetch('/api/updatePlaylists', {
-              method: 'POST',
-              headers: {'content-type': 'application/json'},
-              body: JSON.stringify({'playlistID': randomID, 'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []}),
-            });
-      
-            let playlists = await response.json();
-            localStorage.setItem('playlists', JSON.stringify(playlists));
+          
+          const response = await fetch('/api/updatePlaylists', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(playlist),
+          });
+    
+          let playlists = await response.json();
+          localStorage.setItem('playlists', JSON.stringify(playlists));
         } catch (e) {
-            console.log(e);
-            console.log("Error when updating playlists (adding new) from Node.")
+          console.log(e);
+          console.log("Error when updating playlists (adding new) from Node.")
         }
 
-        broadcastEvent(username, NewPlaylistEvent, playlistName);
+        await broadcastEvent(username, NewPlaylistEvent, playlist['playlistName']);
         alert(`Playlist "${playlistName}" created!`);
     } else {
         alert('Invalid playlist name.');
@@ -239,7 +241,7 @@ function configureWebSocket() {
       displayMsg('Connected to', 'playlist server');
     };
     socket.onclose = (event) => {
-      displayMsg(`${event.message} server`, 'disconnected');
+      displayMsg(`Server`, 'disconnected');
     };
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());

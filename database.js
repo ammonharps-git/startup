@@ -49,7 +49,7 @@ function addUser(user) {
 }
 
 function removeUser(user) {
-  return userCollection.deleteOne({ '_id': new ObjectId(user._id)});
+  return userCollection.deleteOne({ 'username': user.username});
 }
 
 function getUsers() {
@@ -62,7 +62,7 @@ function addPlaylist(playlist) {
 }
 
 function removePlaylist(playlist) {
-  playlistCollection.deleteOne({'playlistID': playlist.playlistID});
+  playlistCollection.deleteOne({'playlistID': playlist['playlistID']});
 }
 
 

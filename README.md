@@ -91,6 +91,17 @@ Talks (TM) will be ported to use the React web framework.
 [x] - done - 20% - Stores and retrieves credentials in MongoDB
 [x] - done - 20% - Restricts application functionality based upon authentication (required to update users in database)
 
+# Websocket Deliverable
+
+[x] - done - Prerequisite: Simon WebSocket deployed to your production environment
+[x] - done - Prerequisite: A link to your GitHub startup repository prominently displayed on your application's home page
+[x] - done - Prerequisite: Notes in your startup Git repository README.md file documenting what you modified and added with this deliverable.
+[x] - done - Prerequisite: At least 10 git commits spread consistently throughout the assignment period.
+[x] - done - WebSocket support for data pushed from the backend
+[x] - done - 20% - Backend listens for WebSocket connection
+[x] - done - 20% - Frontend makes WebSocket connection (adding new playlists)
+[x] - done - 30% - Data sent over WebSocket connection (user and playlist names)
+[x] - done - 30% - WebSocket data displayed in the application interface
 
 # Application sketches
 
