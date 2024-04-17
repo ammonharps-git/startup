@@ -176,6 +176,12 @@ border-bottom-right-radius: 1rem;
     .inputs {
         text-align: right;
     }
+
+    .player-messages {
+        top: 10%;
+        left: 50%;
+        transform: translate(-90%, -50%);
+    }
 }
 
 .active {

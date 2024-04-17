@@ -1,3 +1,8 @@
+// Event messages
+const NewPlaylistEvent = 'NewPlaylist';
+const SystemEvent = 'System'
+
+// Token
 let token = '';
 
 // Display the username at the top of welcome banner
@@ -8,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Update the content of an HTML element with the username
     document.getElementById('bannerUsername').innerText = username;
+
+    configureWebSocket()
 
     displayPlaylists();
 });
@@ -74,9 +81,10 @@ async function createPlaylist() {
             console.log("Error when updating playlists (adding new) from Node.")
         }
 
+        broadcastEvent(username, NewPlaylistEvent, playlistName);
         alert(`Playlist "${playlistName}" created!`);
     } else {
-        alert('Please enter a valid playlist name.');
+        alert('Invalid playlist name.');
     }
     hidePopup();
 }
@@ -226,3 +234,44 @@ function createButton(label, onclick, className, textColor) {
     button.style.cursor = 'pointer';
     return button;
     }
+
+
+// Functionality for peer communication using WebSocket
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+      displayMsg('Playlist server', 'connected');
+    };
+    socket.onclose = (event) => {
+      displayMsg(`${event.message} server`, 'disconnected');
+    };
+    socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === NewPlaylistEvent) {
+        displayMsg(msg.from, `just made a new playlist called ${msg.value.playlistName}`);
+      } else if (msg.type === SystemEvent) {
+        displayMsg(msg.from, msg.value.playlistName);
+      }
+    };
+  }
+
+  function displayMsg(from, msg) {
+    const chatText = document.getElementsByClassName('player-messages');
+    chatText.innerHTML =
+      `<div class="player-messages">${from} ${msg}</div>`;
+    chatText.style.display = 'block';
+    setTimeout(() => {
+        errorMessageElement.style.display = 'none';
+        errorMessageElement.innerText = ''; // Clear the message for the next attempt
+    }, 3000); // Hide the message after 3 seconds
+  }
+
+  function broadcastEvent(from, type, value) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+    };
+    socket.send(JSON.stringify(event));
+  }
