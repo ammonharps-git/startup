@@ -34,11 +34,6 @@ async function createPlaylist() {
     const username = getQueryParam('username');
     if (playlistName.trim() !== '') {
         const randomID = "playlist-" + generateRandomString(20);
-        //console.log(localStorage.getItem(username));
-        //localStorage.setItem(JSON.stringify({'playlistID': randomID, 'playlistOwners': [username], 'playlistName': playlistName, 'playlistDescription': playlistDescription, 'talks': []}));
-        
-        //let profile = JSON.parse(localStorage.getItem(username));
-        //localStorage.setItem(username, JSON.stringify(profile));
         try {
             const response = await fetch('/api/users', {
               method: 'GET',
@@ -241,7 +236,7 @@ function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     socket.onopen = (event) => {
-      displayMsg('Playlist server', 'connected');
+      displayMsg('Connected to', 'playlist server');
     };
     socket.onclose = (event) => {
       displayMsg(`${event.message} server`, 'disconnected');
@@ -249,22 +244,22 @@ function configureWebSocket() {
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === NewPlaylistEvent) {
-        displayMsg(msg.from, `just made a new playlist called ${msg.value.playlistName}`);
+        displayMsg(msg.from, `just made a new playlist called \'${msg.value.playlistName}\'!`);
       } else if (msg.type === SystemEvent) {
         displayMsg(msg.from, msg.value.playlistName);
       }
     };
   }
 
-  function displayMsg(from, msg) {
-    const chatText = document.getElementsByClassName('player-messages');
+  async function displayMsg(from, msg) {
+    const chatText = document.getElementById('player-messages');
     chatText.innerHTML =
       `<div class="player-messages">${from} ${msg}</div>`;
     chatText.style.display = 'block';
     setTimeout(() => {
-        errorMessageElement.style.display = 'none';
-        errorMessageElement.innerText = ''; // Clear the message for the next attempt
-    }, 3000); // Hide the message after 3 seconds
+      chatText.style.display = 'none';
+      chatText.innerText = ''; // Clear the message for the next attempt
+    }, 5000); // Hide the message after 3 seconds
   }
 
   function broadcastEvent(from, type, value) {
