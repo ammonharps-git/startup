@@ -246,9 +246,9 @@ function configureWebSocket() {
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === NewPlaylistEvent) {
-        displayMsg(msg.from, `just made a new playlist called \'${msg.value.playlistName}\'!`);
+        displayMsg(msg.from, `just made a new playlist called \'${msg.value}\'!`);
       } else if (msg.type === SystemEvent) {
-        displayMsg(msg.from, msg.value.playlistName);
+        displayMsg(msg.from, msg.value);
       }
     };
   }
