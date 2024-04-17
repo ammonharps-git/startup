@@ -87,7 +87,6 @@ async function createPlaylist() {
 }
 
 async function createAndReload() {
-    console.log("Got here");        // testing
     await createPlaylist();
     const username = getQueryParam('username');
     window.location.href = `my-playlists.html?username=${encodeURIComponent(username)}`;
@@ -127,8 +126,6 @@ async function displayPlaylists() {
     talkListContainer.innerHTML = '';
 
     const username = getQueryParam('username');
-    //const profile = JSON.parse(localStorage.getItem(username));
-    //const playlists = profile['playlists'];
 
     try {
         const response = await fetch('/api/users', {
@@ -136,12 +133,8 @@ async function displayPlaylists() {
           headers: {'content-type': 'application/json'},
         });
         
-        // Store what the service gave us as the high scores
         let users = await response.json();
-        //let users = users_text.json();
-
         console.log("users", users);     // testing
-        //users = users.json();
         localStorage.setItem('users', JSON.stringify(users));
         const userList = users.filter((item) => item.username === username);
         console.log("userList", userList);     // testing
@@ -160,7 +153,7 @@ async function displayPlaylists() {
 
         // Iterate over the talkList and create/display talk elements
         let index = 0;
-        userPlaylists.forEach(async (playlistID) => {
+        await userPlaylists.forEach(async (playlistID) => {
             console.log("Displaying playlist:", playlistID);
             const response = await fetch('/api/playlists', {
                 method: 'GET',
