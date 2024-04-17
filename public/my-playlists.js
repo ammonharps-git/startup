@@ -78,7 +78,7 @@ async function createPlaylist() {
           console.log("Error when updating playlists (adding new) from Node.")
         }
 
-        await broadcastEvent(username, NewPlaylistEvent, playlist['playlistName']);
+        await broadcastEvent(username, NewPlaylistEvent, playlistName);
         alert(`Playlist "${playlistName}" created!`);
     } else {
         alert('Invalid playlist name.');
