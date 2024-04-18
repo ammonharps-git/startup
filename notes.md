@@ -31,3 +31,19 @@ Overall this assignment was very helpful for me for understanding how domain nam
 This project was helpful for understanding how to create the skeleton of a website. I think it is super interesting how the different pages can link between each other and create a better user interface. 
 
 Overall this assignment was helpful for understanding how to create a more structured environment for the full website. 
+
+# Startup CSS
+
+CSS is super interesting and seems like the real backbone to modern web graphics. It controls a website's visual appearance, which is separate from its content. This allows for cleaner code and easier maintenance. With CSS, I can style fonts, colors, layouts, and even add animations, making your webpages visually appealing and user-friendly.
+
+# Startup Services
+
+Backend services are the hidden engines that power websites and apps. They handle crucial tasks like storing data in databases, managing user accounts, and sending push notifications. They prepare the data, manage requests, and ensure everything runs smoothly, while the frontend delivers the final experience to the user. I appreciate the simplicity and power of middleware for creating chains of processing requests.
+
+# Startup Login
+
+MongoDB is amazing! I really like that it stores data like documents, not rigid tables. That means no more fighting with schemas – I can just add new info as I get it. This is perfect for projects with constantly evolving data. Plus, it uses JSON, which I already know, for super easy interaction. MongoDB sounds like a game-changer for building flexible and scalable web apps.
+
+# Startup Websocket
+
+WebSockets are super useful. Instead of the usual back-and-forth of refreshing pages, a browser and server can send messages directly to each other. This is perfect for live updates like chat apps or dynamic dashboards, and it allows for a whole new phlethora of interesting peer-to-peer relationships in web applications. 

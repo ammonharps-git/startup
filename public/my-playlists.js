@@ -124,7 +124,6 @@ async function displayPlaylists() {
 
     // Clear the existing content in the container
     talkListContainer.innerHTML = '';
-
     const username = getQueryParam('username');
 
     try {
