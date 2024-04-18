@@ -128,7 +128,7 @@ async function displayPlaylists() {
     const username = getQueryParam('username');
 
     try {
-        const response = await fetch('/api/users', {
+        let response = await fetch('/api/users', {
           method: 'GET',
           headers: {'content-type': 'application/json'},
         });
@@ -152,15 +152,16 @@ async function displayPlaylists() {
         }
 
         // Iterate over the talkList and create/display talk elements
+        response = await fetch('/api/playlists', {
+          method: 'GET',
+          headers: {'content-type': 'application/json'},
+        });
+        const playlists = await response.json();
+        localStorage.setItem('playlists', JSON.stringify(playlists));
         let index = 0;
         await userPlaylists.forEach(async (playlistID) => {
             console.log("Displaying playlist:", playlistID);
-            const response = await fetch('/api/playlists', {
-                method: 'GET',
-                headers: {'content-type': 'application/json'},
-            });
-            const playlists = await response.json();
-            localStorage.setItem('playlists', JSON.stringify(playlists));
+            
             const playlist = playlists.filter((item) => item.playlistID === playlistID)[0]
             //const playlist = JSON.parse(localStorage.getItem(playlistID));
 
@@ -168,7 +169,7 @@ async function displayPlaylists() {
                 method: 'GET',
                 headers: {'content-type': 'application/json'},
             });
-            const imageData = reply;
+            const imageData = await reply;
             const imageUrl = imageData.download_url || imageData.url; 
 
 
